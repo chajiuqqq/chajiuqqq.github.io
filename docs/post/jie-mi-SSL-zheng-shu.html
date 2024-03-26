@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="//cdn.staticfile.org/Primer/21.0.7/primer.css" rel="stylesheet" />
+    <link rel="icon" href="http://meekdai.com/favicon.ico">
+    <script>
+        if(localStorage.getItem("meek_theme")==null){}
+        else if(localStorage.getItem("meek_theme")=="dark"){document.getElementsByTagName("html")[0].attributes.getNamedItem("data-color-mode").value="dark";}
+        else if(localStorage.getItem("meek_theme")=="light"){document.getElementsByTagName("html")[0].attributes.getNamedItem("data-color-mode").value="light";}
+    </script>
+    
+<title>解密SSL证书</title>
+
+
+</head>
+<style>
+body{
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 45px;
+    font-size: 16px;
+    font-family: sans-serif;
+    line-height: 1.25;
+}
+
+.avatar {transition: 0.8s;}
+.avatar:hover {transform: scale(1.15) rotate(360deg);}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+h1 a:not([href]){color:inherit;text-decoration:none;vertical-align: bottom;font-size:40px;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 767px) {body {padding: 8px;}}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1>
+    <a>解密SSL证书</a>
+</h1>
+<div class="title-right">
+
+    <a href="/"><button id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd" d="M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"></path>
+        </svg>
+    </button></a>
+
+    <a href="https://github.com/chajiuqqq/chajiuqqq.github.io/issues/4" target="_blank"><button class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+        </svg>
+    </button></a>
+
+    <button class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </button>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody">
+<blockquote>
+<p>原文：<a href="https://jvns.ca/blog/2017/01/31/whats-tls/" rel="nofollow">https://jvns.ca/blog/2017/01/31/whats-tls/</a></p>
+</blockquote>
+<div class="markdown-heading"><h1 class="heading-element">TLS：SSL的最新版本</h1><a id="user-content-tlsssl的最新版本" class="anchor" aria-label="Permalink: TLS：SSL的最新版本" href="#tlsssl的最新版本"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>我曾困惑于TLS是什么，基本上SSL的最新版本被称为TLS（SSL 3.0之后的版本就是TLS1.0），为了避免混淆，我还是称其为SSL。</p>
+<div class="markdown-heading"><h1 class="heading-element">什么是证书？</h1><a id="user-content-什么是证书" class="anchor" aria-label="Permalink: 什么是证书？" href="#什么是证书"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>假设我在 <a href="https://mail.google.com/" rel="nofollow">https://mail.google.com/</a> 检查我的邮件，<code>mail.google.com</code>是运行在443端口上的HTTPS服务，我想要确定我正在访问<code>mail.google.com</code>而不是互联网上其他恶意的服务。</p>
+<p>证书的概念曾经困惑了我很久，一天我的同事Ray告诉我可以通过命令行连接服务器并下载它的证书。（如果你想看SSL证书，也可以点击浏览器的绿色锁标志，获取你需要的信息，他们是可信的）</p>
+<p>让我们来看一下<code>mail.google.com</code>的证书，并尝试解构它。</p>
+<p>首先运行<code>openssl s_client -connect mail.google.com:443</code></p>
+<p>这会打印很多信息，我们只要关注证书部分：</p>
+<pre><code>$ openssl s_client -connect mail.google.com:443
+...
+-----BEGIN CERTIFICATE-----
+MIIElDCCA3ygAwIBAgIIMmzfdZnO9pMwDQYJKoZIhvcNAQELBQAwSTELMAkGA1UE
+BhMCVVMxEzARBgNVBAoTCkdvb2dsZSBJbmMxJTAjBgNVBAMTHEdvb2dsZSBJbnRl
+cm5ldCBBdXRob3JpdHkgRzIwHhcNMTcwMTE4MTg1MjExWhcNMTcwNDEyMTg1MDAw
+WjBpMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwN
+TW91bnRhaW4gVmlldzETMBEGA1UECgwKR29vZ2xlIEluYzEYMBYGA1UEAwwPbWFp
+bC5nb29nbGUuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiYcr
+C9Rn7g9xjsg7khqfRPxUnvpgGyCHqJMXxZGtdf+G02d07cPlMEeaGG12vHyVfRZD
+tc/F1ZfwenH6gf0uMobtgw7n2NQa7T7qxuqSUDhZsO1sI1LL/Yqy8QHoooOZQWMz
+ytuRA18zti4vQV1dCijADh0+NWI1GDUAKidbaH/fBRrStqBev5Bhq3ZaGj3fDjAO
+7CG0Wk3n4Ov2yg44XOdgkLMzjdnbV8l6cZDC7lCK1VsEU1mEd0O0Dw4OcnHLuBPw
+IkioZayhPOXDXUS+bhpmtEiCkt8kbHG6jNMC4m8t62Jaf/Si3XNcHhDa4wPCTvid
+X//PuuNlRZVg3NjK/wIDAQABo4IBXjCCAVowHQYDVR0lBBYwFAYIKwYBBQUHAwEG
+CCsGAQUFBwMCMCwGA1UdEQQlMCOCD21haWwuZ29vZ2xlLmNvbYIQaW5ib3guZ29v
+Z2xlLmNvbTBoBggrBgEFBQcBAQRcMFowKwYIKwYBBQUHMAKGH2h0dHA6Ly9wa2ku
+Z29vZ2xlLmNvbS9HSUFHMi5jcnQwKwYIKwYBBQUHMAGGH2h0dHA6Ly9jbGllbnRz
+MS5nb29nbGUuY29tL29jc3AwHQYDVR0OBBYEFI69aYCEtb2swbJJR3cMOTdcfvZ4
+MAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUSt0GFhu89mi1dvWBtrtiGrpagS8w
+IQYDVR0gBBowGDAMBgorBgEEAdZ5AgUBMAgGBmeBDAECAjAwBgNVHR8EKTAnMCWg
+I6Ahhh9odHRwOi8vcGtpLmdvb2dsZS5jb20vR0lBRzIuY3JsMA0GCSqGSIb3DQEB
+CwUAA4IBAQAhiqQIwkGp1NmlLq89gjoAfpwaapHuRixxl2S54fyu/4WOHJJafqVA
+Tya9J7GTUCyQ6nszCdVizVP26h9TKOs9LJw5jWV9SOnPU2UZKvrNnOUi2FUkCcuD
+lsADdKSXNzye3jB88TENrWC/y3ysPdAgPO/sXzyRvNw8SVKl2+RqMDpSRpBptF9e
+Lp+WLAM3xKS5SPwCNdCiA332o7qiKRKQm/6bbIWnm7hp/ZnLxbyKaIVytRdiwRNp
+O/TTpRv2C708GA3PH6i1pYE86xm3w7lGhN9OiCZpKOJD6ZUH3W20idgPKYPBCO/N
+Op2AF3I4iUGeQjXFVLgS6mjUvdLndL9G
+-----END CERTIFICATE-----
+</code></pre>
+<p>目前为止，这些东西是难以理解的，实际上着这些东西是<code>X509</code>格式的，<code>openssl</code>命令可以对其解码。</p>
+<p>把这些信息保存为<code>cert.pem</code>文件，<a href="https://gist.githubusercontent.com/jvns/2c249b8059c0b183c02bb3a71e12e418/raw/b4afd1877471b72f8900b2396c30bc670a5701c9/mail_google_cert.pem" rel="nofollow">文件副本</a>你也可以直接下载我保存的这个。</p>
+<p>下一个任务是转义这个证书，这样做：</p>
+<pre><code>$ openssl x509 -in cert.pem -text
+
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 3633524695565792915 (0x326cdf7599cef693)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, O=Google Inc, CN=Google Internet Authority G2
+        Validity
+            Not Before: Jan 18 18:52:11 2017 GMT
+            Not After : Apr 12 18:50:00 2017 GMT
+        Subject: C=US, ST=California, L=Mountain View, O=Google Inc, CN=mail.google.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:89:87:2b:0b:d4:67:ee:0f:71:8e:c8:3b:92:1a:
+                    9f:44:fc:54:9e:fa:60:1b:20:87:a8:93:17:c5:91:
+                    .... blah blah blah ............
+                    c2:4e:f8:9d:5f:ff:cf:ba:e3:65:45:95:60:dc:d8:
+                    ca:ff
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Alternative Name: 
+                DNS:mail.google.com, DNS:inbox.google.com
+
+            X509v3 Subject Key Identifier: 
+                8E:BD:69:80:84:B5:BD:AC:C1:B2:49:47:77:0C:39:37:5C:7E:F6:78
+    Signature Algorithm: sha256WithRSAEncryption
+         21:8a:a4:08:c2:41:a9:d4:d9:a5:2e:af:3d:82:3a:00:7e:9c:
+         1a:6a:91:ee:46:2c:71:97:64:b9:e1:fc:ae:ff:85:8e:1c:92:
+         ......... blah blah blah more goes here ...........
+</code></pre>
+<p>这里有很多东西，有几个部分需要理解：</p>
+<ul>
+<li>
+<code>CN=mail.google.com</code>是<code>common name</code>，但是你需要反直觉地忽略这个名字，去看<code>subject alternative name</code>的部分。</li>
+<li>
+<code>expiry date</code>：过期日期 Apr 12 18:50:00 2017 GMT</li>
+<li>
+<code>X509v3 Subject Alternative Name</code>: 这个证书为以下域名提供支持，包括了mail.google.com 和inbox.google.com,这些都是邮件域名</li>
+<li>
+<code>Public Key Info</code>：mail.google.com的公钥，通过公钥和mail.google.com进行通讯</li>
+<li>
+<code>signature</code>：签名是最重要的东西，基本上每个人都可以生成mail.google.com的证书，但是没有这个签名，即使我给你证书你也没有理由相信这是一个真的证书，这就是签名的用处。</li>
+</ul>
+<p>所以让我们来看看什么是证书签名。</p>
+<div class="markdown-heading"><h1 class="heading-element">证书签名</h1><a id="user-content-证书签名" class="anchor" aria-label="Permalink: 证书签名" href="#证书签名"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>互联网上的证书通常会把两个部分组合起来：</p>
+<ol>
+<li>证书（适用的域名和公钥，还有其他信息）</li>
+<li>某个机构的签名，等于在说“visa也认为证书没问题”</li>
+</ol>
+<p>在/etc/ssl/certs下存了很多证书，这些证书是被信任的，可以让我的计算机签署其他证书。比如<code>/etc/ssl/certs/Staat_der_Nederlanden_EV_Root_CA.pem</code>，这是来自荷兰的证书！假设这个机构签署了mail.google.com的证书，我的计算机会认为“这证书不错，而且荷兰CA也这么认为”。</p>
+<p>如果大街上随机一个人签署了证书，我的计算机则会说“我不知道这是哪位仁兄签署的”，并拒绝该证书。</p>
+<p>mail.google的证书是：</p>
+<ul>
+<li><code>s:/C=US/ST=California/L=Mountain View/O=Google Inc/CN=mail.google.com</code></li>
+<li>表明由<code>Google Internet Authority G2</code>签署证书</li>
+<li>表明被 <code>GeoTrust Global CA</code>签署证书</li>
+<li>表明被<code>Equifax Secure Certificate Authority</code>签署证书</li>
+</ul>
+<p>我有个/etc/ssl/certs/GeoTrust_Global_CA.pem文件，这解释了为什么我信任mail.google.com证书（Geotrust 信任谷歌证书，谷歌签署了mail.google.com）</p>
+<div class="markdown-heading"><h1 class="heading-element">如何发行一个证书？</h1><a id="user-content-如何发行一个证书" class="anchor" aria-label="Permalink: 如何发行一个证书？" href="#如何发行一个证书"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>发行一个证书的过程通常是这样的：</p>
+<ol>
+<li>自己生成证书的第一部分（过期日期、公钥），这部分是公开可见的</li>
+<li>同时生成证书的私钥，你要自行保存私钥并不能泄露出去，每次建立SSL连接时需要用到私钥。</li>
+<li>向CA机构申请给你的证书签名（通常要付费），CA机构应该要验证证书可信度，也就是要验证申请者具有该域名的所有权。</li>
+<li>你将证书配置到你的网站上，这样就可以证明你是你了！</li>
+</ol>
+<p>证书机构需要验证域名的完整和真实性，所以当出现Symantec那种CA机构的问题时，人们会很糟心（Symantec为未经验证的域名提供测试证书）</p>
+<div class="markdown-heading"><h1 class="heading-element">透明证书</h1><a id="user-content-透明证书" class="anchor" aria-label="Permalink: 透明证书" href="#透明证书"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>最后一部分我想谈谈透明证书的问题，这件事很有趣，如你有一个网站我可以肯定你大概率会遇到它。</p>
+<p>我们说CA需要具备可信度，但是我的计算机信任很多CA机构，万一其中一个给mail.google.com签署了一个欺诈证书（伪造我是域名拥有者），这可能导致不好的问题。</p>
+<p>这不是假设的问题，<a href="https://www.certificate-transparency.org/what-is-ct" rel="nofollow">certificate transparency</a>网站里提供了很多个CA被妥协或者出现了错误导致欺诈证书的例子。</p>
+<p>解决方法是，Google知道所有mail.google.com的合法证书，可能有一个或多个，透明证书确保如果出现了一个mail.google.com的未知证书，他们会立刻定位出来。</p>
+<p>步骤是这样的：</p>
+<ol>
+<li>每次CA签署证书时，他们会把它放入公共的<code>certificate log</code>，名为证书日志</li>
+<li>Googlebot 也会把爬取到的网站证书放入<code>certificate log</code>
+</li>
+<li>如果一个证书不在log中，浏览器会拒绝该证书（或者即将拒绝）</li>
+<li>任何人都可以查看<code>certificate log</code>以查找出是不是有欺诈证书</li>
+</ol>
+<p>所以如果荷兰的CA签署了一个mail.google.com的欺诈证书，他们必须要把证书放入公共的log中（Google就能发现问题），如果不放入公共log，浏览器会拒绝证书。</p>
+<div class="markdown-heading"><h1 class="heading-element">let’s encrypt 进行签署</h1><a id="user-content-lets-encrypt-进行签署" class="anchor" aria-label="Permalink: let’s encrypt 进行签署" href="#lets-encrypt-进行签署"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p><a href="https://letsencrypt.org/" rel="nofollow">let’s encrypt</a>真的很酷！他们让您拥有您的网站证书并确保它的安全性，甚至不需要了解有关证书在内部工作方式的所有这些信息！而且它是免费的。</p>
+
+</div>
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+</div>
+    <div id="footer">Copyright © <span id="year"></span> <a href="https://chajiuqqq.github.io/"> Chris.Cai Blog </a><p>  <span id="runday"></span>Powered by <a href="https://github.com/Meekdai/Gmeek" target="_blank">Gmeek</a></p>
+
+<script>
+if(""!=""){
+    var now=new Date();
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("year").innerHTML=now.getFullYear();
+    if(""!=""){document.getElementById("runday").innerHTML=" • "+"网站运行"+diffDay+"天"+" • ";}
+    else{document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";}
+}
+</script>
+</div>
+</body>
+<script>
+var IconList={'post': 'M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z', 'link': 'm7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z', 'about': 'M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z', 'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'search': 'M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z', 'rss': 'M2.002 2.725a.75.75 0 0 1 .797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 0 1-1.497.098 10.502 10.502 0 0 0-9.776-9.776.747.747 0 0 1-.7-.798ZM2.84 7.05h-.002a7.002 7.002 0 0 1 6.113 6.111.75.75 0 0 1-1.49.178 5.503 5.503 0 0 0-4.8-4.8.75.75 0 0 1 .179-1.489ZM2 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z', 'upload': 'M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z M11.78 4.72a.749.749 0 1 1-1.06 1.06L8.75 3.811V9.5a.75.75 0 0 1-1.5 0V3.811L5.28 5.78a.749.749 0 1 1-1.06-1.06l3.25-3.25a.749.749 0 0 1 1.06 0l3.25 3.25Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z'};
+var utterancesLoad=0;
+if(localStorage.getItem("meek_theme")==null){localStorage.setItem("meek_theme","light");changeLight();}
+else if(localStorage.getItem("meek_theme")=="dark"){changeDark();}
+else if(localStorage.getItem("meek_theme")=="light"){changeLight();}
+
+function changeDark(){
+    document.getElementsByTagName("html")[0].attributes.getNamedItem("data-color-mode").value="dark";
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList["moon"]);
+    document.getElementById("themeSwitch").parentNode.style.color="#00f0ff";
+    if(utterancesLoad==1){utterancesTheme("dark-blue");}
+}
+function changeLight(){
+    document.getElementsByTagName("html")[0].attributes.getNamedItem("data-color-mode").value="light";
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList["sun"]);
+    document.getElementById("themeSwitch").parentNode.style.color="#ff5000";
+    if(utterancesLoad==1){utterancesTheme("github-light");}
+}
+function modeSwitch(){
+    if(document.getElementsByTagName("html")[0].attributes[0].value=="light"){changeDark();localStorage.setItem("meek_theme","dark");}
+    else{changeLight();localStorage.setItem("meek_theme","light");}
+}
+function utterancesTheme(theme){
+    const message = {type: 'set-theme',theme: theme};
+    const iframe = document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+}
+
+console.log("\n %c Gmeek v2.4 %c https://github.com/Meekdai/Gmeek \n\n", "color: #fff; background-image: linear-gradient(90deg, rgb(47, 172, 178) 0%, rgb(45, 190, 96) 100%); padding:5px 1px;", "background-image: linear-gradient(90deg, rgb(45, 190, 96) 0%, rgb(255, 255, 255) 100%); padding:5px 0;");
+</script>
+
+<script>
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","chajiuqqq/chajiuqqq.github.io");
+    script.setAttribute("issue-term","title");
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else{script.setAttribute("theme","github-light");}
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+</script>
+
+
+
+
+</html>
