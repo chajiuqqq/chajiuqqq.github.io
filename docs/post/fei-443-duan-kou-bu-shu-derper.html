@@ -98,31 +98,128 @@ h1 a:not([href]){color:inherit;text-decoration:none;vertical-align: bottom;font-
 <li>admin console上配置好derper map:</li>
 </ol>
 <pre><code>"901": {
-				"RegionID":   901,
-				"RegionCode": "CN",
-				"RegionName": "China",
-				"Nodes": [
-					{
-						"Name":     "aliyun",
-						"RegionID": 901,
-						"HostName": "derper.xxx.xx",
-						"DERPPort": 9000,
-					},
-				],
-			},
+    "RegionID":   901,
+    "RegionCode": "CN",
+    "RegionName": "China",
+    "Nodes": [
+     {
+      "Name":     "aliyun",
+      "RegionID": 901,
+      "HostName": "derper.xxx.xx",
+      "DERPPort": 9000,
+     },
+    ],
+   },
 </code></pre>
 <ol start="4">
 <li>最后出现relay=CN就成功了</li>
 </ol>
 <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/chajiuqqq/chajiuqqq.github.io/assets/50012686/638aaae7-2593-4e09-9a60-786cd6d3ac7a"><img src="https://github.com/chajiuqqq/chajiuqqq.github.io/assets/50012686/638aaae7-2593-4e09-9a60-786cd6d3ac7a" alt="image" style="max-width: 100%;"></a></p>
-<h2><a id="user-content-problem-shot" class="anchor" aria-hidden="true" tabindex="-1" href="#problem-shot"><span aria-hidden="true" class="octicon octicon-link"></span></a>problem shot</h2>
+<div class="markdown-heading"><h2 class="heading-element">problem shot</h2><a id="user-content-problem-shot" class="anchor" aria-label="Permalink: problem shot" href="#problem-shot"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>客户端运行 <code>tailscale status</code>时出现<strong>derper certificate is self-signed</strong></p>
 <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/chajiuqqq/chajiuqqq.github.io/assets/50012686/3ad4b3f7-ec71-4e92-a14f-283cdb29ba5f"><img src="https://github.com/chajiuqqq/chajiuqqq.github.io/assets/50012686/3ad4b3f7-ec71-4e92-a14f-283cdb29ba5f" alt="image" style="max-width: 100%;"></a></p>
 <p>这个问题怀疑是客户端根证书没有被信任，但是访问derper web界面是安全的。后面把网站证书和证书链合并了，就又可以了，可以尝试解决：</p>
 <pre><code>cat yourSite.crt chain.crt &gt; derper.xxx.xx.crt
 </code></pre>
-<h2><a id="user-content-感谢" class="anchor" aria-hidden="true" tabindex="-1" href="#感谢"><span aria-hidden="true" class="octicon octicon-link"></span></a>感谢</h2>
+<div class="markdown-heading"><h2 class="heading-element">感谢</h2><a id="user-content-感谢" class="anchor" aria-label="Permalink: 感谢" href="#感谢"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><a href="https://github.com/tailscale/tailscale/issues/7126">https://github.com/tailscale/tailscale/issues/7126</a></p>
+<hr>
+<p>[4/23 update]</p>
+<div class="markdown-heading"><h2 class="heading-element">使用acme.sh申请证书</h2><a id="user-content-使用acmesh申请证书" class="anchor" aria-label="Permalink: 使用acme.sh申请证书" href="#使用acmesh申请证书"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>derper提供的命令行中，如果443端口可以使用let's encrypt申请证书，但不是443上跑就要手动提供证书。这里补充用acme.sh申请证书并自动更新证书。</p>
+<ol>
+<li>China方式安装<a href="https://github.com/acmesh-official/acme.sh/wiki/Install-in-China">acme.sh</a>
+</li>
+</ol>
+<pre><code>git clone https://gitee.com/neilpang/acme.sh.git
+cd acme.sh
+./acme.sh --install -m my@example.com
+</code></pre>
+<ol start="2">
+<li><a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E#2-%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6">生成证书的几种方式</a></li>
+</ol>
+<p>这里用 acme.sh 假装自己是一个webserver, 临时听在80 端口, 完成验证实现证书申请。注意这里-d可以有多个域名，比如<code>-d example.com</code>, <code>-d example.com</code>，这样生成的证书可以给多个域名使用：</p>
+<pre><code>acme.sh --issue -d mydomain.com --standalone
+</code></pre>
+<ol start="3">
+<li>~/.acme.sh下的域名文件夹中fullchain.cer就是完整的证书链，.key就是私钥。查看fullchain.cer可以看到三段证书，分别是</li>
+</ol>
+<ul>
+<li>网站域名证书</li>
+<li>Let's Encrypt颁发的中间机构证书</li>
+<li>Let's Encrypt根证书</li>
+</ul>
+<p>形成了完整的证书链。</p>
+<pre><code>cat   fullchain.cer  #I list part of each certificate
+
+-----BEGIN CERTIFICATE-----
+MIIFGzCCBAOgAwIBAgISA8r1Ru/nVltRJjbcCA7J7mFGMA0GCSqGSIb3DQEBCwUA
+MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
+EwJSMzAeFw0yMjA0MTAwNTE2MzNaFw0yMjA3MDkwNTE2MzJaMBUxEzARBgNVBAMT
+CmxhaGF3YS54eXowggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDwij1T
+n6GkUu6Vom80ouqn
+-----END CERTIFICATE-----
+
+-----BEGIN CERTIFICATE-----
+MIIFFjCCAv6gAwIBAgIRAJErCErPDBinU/bWLiWnX1owDQYJKoZIhvcNAQELBQAw
+TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh
+cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMjAwOTA0MDAwMDAw
+WhcNMjUwOTE1MTYwMDAwWjAyMQswCQYDVQQGEwJVUzEWMBQGA1UEChMNTGV0J3Mg
+RW5jcnlwdDELMAkGA1UEAxMCUjMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+AoIBAQC7AhUozPaglNMPEuyNVZLD+ILxmaZ6QoinXSaqtSu5xUyxr45r+XXIo9cP
+
+-----END CERTIFICATE-----
+
+-----BEGIN CERTIFICATE-----
+MIIFYDCCBEigAwIBAgIQQAF3ITfU6UK47naqPGQKtzANBgkqhkiG9w0BAQsFADA/
+MSQwIgYDVQQKExtEaWdpdGFsIFNpZ25hdHVyZSBUcnVzdCBDby4xFzAVBgNVBAMT
+DkRTVCBSb290IENBIFgzMB4XDTIxMDEyMDE5MTQwM1oXDTI0MDkzMDE4MTQwM1ow
+TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh
+cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwggIiMA0GCSqGSIb3DQEB
+AQUAA4ICDwAwggIKAoICAQCt6CRz9BQ385ueK1coHIe+3LffOJCMbjzmV6B493XC
+ov71am72AE8o295ohmxEk7
+-----END CERTIFICATE-----
+</code></pre>
+<blockquote>
+<p>The end-user certificate for the domain you requested (e.g. example.com).
+The intermediate certificate(s) issued by the Let's Encrypt certificate authority.
+The root certificate of the Let's Encrypt certificate authority.</p>
+</blockquote>
+<ol start="5">
+<li>复制到<code>/root/.cache/tailscale/derper-certs/</code>下，并重命名为<code>derper.xxx.xx.crt</code>和<code>derper.xxx.xx.key</code>
+</li>
+</ol>
+<p><a href="https://stackoverflow.com/a/642346" rel="nofollow">crt文件和cer文件内容是一致的</a>，只是扩展名不同，而derper会去寻找crt文件，所以可以直接重命名即可。如果
+证书以 <code>-----BEGIN CERTIFICATE-----</code>开头，就是把X.509格式证书以base64编码了。否则就是二进制的X.509格式。</p>
+<ol start="7">
+<li>运行最上面第二步启动derper即可</li>
+</ol>
+<p><strong>证书更新：</strong></p>
+<p>使用<code>acme.sh --info -d example.com</code> 查看证书信息，可以看到<code>Le_NextRenewTimeStr</code>为证书下次更新时间。对于derper，需要手动把新的证书复制到上述<code>/root/.cache/tailscale/derper-certs/</code>下才能生效（<em>待确认</em>）</p>
+<pre><code>acme.sh --info -d example.com
+# 会输出如下内容：
+DOMAIN_CONF=/root/.acme.sh/example.com/example.com.conf
+Le_Domain=example.com
+Le_Alt=no
+Le_Webroot=dns_ali
+Le_PreHook=
+Le_PostHook=
+Le_RenewHook=
+Le_API=https://acme-v02.api.letsencrypt.org/directory
+Le_Keylength=
+Le_OrderFinalize=https://acme-v02.api.letsencrypt.org/acme/finalize/23xxxx150/781xxxx4310
+Le_LinkOrder=https://acme-v02.api.letsencrypt.org/acme/order/233xxx150/781xxxx4310
+Le_LinkCert=https://acme-v02.api.letsencrypt.org/acme/cert/04cbd28xxxxxx349ecaea8d07
+Le_CertCreateTime=1649358725
+Le_CertCreateTimeStr=Thu Apr  7 19:12:05 UTC 2022
+Le_NextRenewTimeStr=Mon Jun  6 19:12:05 UTC 2022
+Le_NextRenewTime=1654456325
+Le_RealCertPath=
+Le_RealCACertPath=
+Le_RealKeyPath=/etc/acme/example.com/privkey.pem
+Le_ReloadCmd=service nginx force-reload
+Le_RealFullChainPath=/etc/acme/example.com/chain.pem
+</code></pre>
 
 </div>
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
@@ -177,7 +274,11 @@ console.log("\n %c Gmeek v2.4 %c https://github.com/Meekdai/Gmeek \n\n", "color:
 
 <script>
 
-
+cmButton=document.getElementById("cmButton");
+    span=document.createElement("span");
+    span.setAttribute("class","Counter");
+    span.innerHTML="2";
+    cmButton.appendChild(span);
 
 function openComments(){
     cm=document.getElementById("comments");
