@@ -26,5 +26,12 @@ EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。上游�
 4. 增量数据为空时，直接返回，不通知子系统
 ![image](https://github.com/user-attachments/assets/075a05e3-4a56-4825-a36b-85f67e49af9a)
 
+**结果验证**
+看到时间窗口变化：
+<img width="506" alt="企业微信截图_17210959141932" src="https://github.com/user-attachments/assets/a0d47ce7-48a5-4be6-b479-cf20eb28ffb6">
+
+看到同步的记录数量变化：
+<img width="834" alt="企业微信截图_17210959238710" src="https://github.com/user-attachments/assets/1f285f0c-6d0d-42d3-8dc0-dd868cdbb9b0">
+
 事件处理流程：
 ![image](https://github.com/user-attachments/assets/70d087f9-1734-4f9e-8fe1-2cfb6f6d1c69)
