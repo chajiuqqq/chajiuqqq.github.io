@@ -17,7 +17,7 @@ EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。上游�
 1. 增加时间窗口两个边界
 ![image](https://github.com/user-attachments/assets/e8eb017a-20ae-4115-9156-3136db50f498)
 
-2. 收到事件时，左边界初始化为1970，右边界取当前时间
+2. 系统启动后第一次收到事件时，左边界初始化为1970，右边界取当前时间
 ![image](https://github.com/user-attachments/assets/09391548-95e7-49d0-8083-c4286b98f3ad)
 
 3. 一次同步完成后，更新左边界，并重置右边界。注意这里要进行值拷贝，不然左右边界都会变成nil
