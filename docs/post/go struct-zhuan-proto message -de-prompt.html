@@ -4,12 +4,27 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="//cdn.staticfile.net/Primer/21.0.7/primer.css" rel="stylesheet" />
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     <link rel="icon" href="http://meekdai.com/favicon.ico"><script>
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="go struct转proto message 的prompt">
+<meta name="description" content="# prompt
+
+帮我把go的struct定义转为proto message定义
+1. 其中message的变量名称用小写+下划线格式命名
+2. go中类似Enum[oms.FeedingType] 的类型转为proto的oms.FeedingType类型
+3. 请把tag中的comment作为注释加到每行定义之后，并忽略其他tag。">
+<meta property="og:title" content="go struct转proto message 的prompt">
+<meta property="og:description" content="# prompt
+
+帮我把go的struct定义转为proto message定义
+1. 其中message的变量名称用小写+下划线格式命名
+2. go中类似Enum[oms.FeedingType] 的类型转为proto的oms.FeedingType类型
+3. 请把tag中的comment作为注释加到每行定义之后，并忽略其他tag。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/go%20struct-zhuan-proto%20message%20-de-prompt.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
 <title>go struct转proto message 的prompt</title>
 <link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
@@ -140,8 +155,10 @@ type FeedingReqLine struct {
 <li>结果只包含message部分，不包含其他信息（如Proto版本等）。</li>
 </ol></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
+
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>
+
 </div>
     <div id="footer">Copyright © <span id="year"></span><a href="https://chajiuqqq.github.io/"> Chris.Cai Blog </a>
 <p>
@@ -190,12 +207,14 @@ function utterancesTheme(theme){
     iframe.contentWindow.postMessage(message,'https://utteranc.es');
 }
 if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
-console.log("\n %c Gmeek v2.16 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
+console.log("\n %c Gmeek v2.21 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
 </script>
 
 <script>
 document.getElementById("pathHome").setAttribute("d",IconList["home"]);
 document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
 
 function openComments(){
     cm=document.getElementById("comments");
@@ -233,7 +252,6 @@ function iFrameLoading(){
     }
 }
 </script>
-
 
 
 </html>

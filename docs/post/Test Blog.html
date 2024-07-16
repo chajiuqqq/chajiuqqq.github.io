@@ -4,12 +4,27 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="//cdn.staticfile.net/Primer/21.0.7/primer.css" rel="stylesheet" />
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     <link rel="icon" href="http://meekdai.com/favicon.ico"><script>
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="Test Blog">
+<meta name="description" content="# Topic
+
+**Hello，This is my cat!**
+
+![tk](https://github.com/chajiuqqq/chajiuqqq.github.io/assets/50012686/c2406b48-9eca-4c3f-a282-6c037db3360a)
+。">
+<meta property="og:title" content="Test Blog">
+<meta property="og:description" content="# Topic
+
+**Hello，This is my cat!**
+
+![tk](https://github.com/chajiuqqq/chajiuqqq.github.io/assets/50012686/c2406b48-9eca-4c3f-a282-6c037db3360a)
+。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/Test%20Blog.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
 <title>Test Blog</title>
 
 
@@ -69,8 +84,10 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><strong>Hello，This is my cat!</strong></p>
 <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/chajiuqqq/chajiuqqq.github.io/assets/50012686/c2406b48-9eca-4c3f-a282-6c037db3360a"><img src="https://github.com/chajiuqqq/chajiuqqq.github.io/assets/50012686/c2406b48-9eca-4c3f-a282-6c037db3360a" alt="tk" style="max-width: 100%;"></a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
+
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>
+
 </div>
     <div id="footer">Copyright © <span id="year"></span><a href="https://chajiuqqq.github.io/"> Chris.Cai Blog </a>
 <p>
@@ -119,7 +136,7 @@ function utterancesTheme(theme){
     iframe.contentWindow.postMessage(message,'https://utteranc.es');
 }
 if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
-console.log("\n %c Gmeek v2.16 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
+console.log("\n %c Gmeek v2.21 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
 </script>
 
 <script>
@@ -130,6 +147,8 @@ cmButton=document.getElementById("cmButton");
     span.setAttribute("class","Counter");
     span.innerHTML="1";
     cmButton.appendChild(span);
+
+
 function openComments(){
     cm=document.getElementById("comments");
     cmButton=document.getElementById("cmButton");
@@ -166,7 +185,6 @@ function iFrameLoading(){
     }
 }
 </script>
-
 
 
 </html>

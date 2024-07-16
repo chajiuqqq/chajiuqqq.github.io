@@ -4,12 +4,29 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="//cdn.staticfile.net/Primer/21.0.7/primer.css" rel="stylesheet" />
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     <link rel="icon" href="http://meekdai.com/favicon.ico"><script>
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="[TODO] Go微服务开发调研 ｜ A survey in Go microservices development">
+<meta name="description" content="大纲
+
+- 什么是微服务架构？
+- 微服务开发和传统单体应用有什么区别？
+- 什么是服务治理？
+- 常用微服务开发框架有哪些？
+- 微服务开发流程？。">
+<meta property="og:title" content="[TODO] Go微服务开发调研 ｜ A survey in Go microservices development">
+<meta property="og:description" content="大纲
+
+- 什么是微服务架构？
+- 微服务开发和传统单体应用有什么区别？
+- 什么是服务治理？
+- 常用微服务开发框架有哪些？
+- 微服务开发流程？。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/%5BTODO%5D%20Go-wei-fu-wu-kai-fa-diao-yan-%20%EF%BD%9C%20A%20survey%20in%20Go%20microservices%20development.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
 <title>[TODO] Go微服务开发调研 ｜ A survey in Go microservices development</title>
 
 
@@ -74,8 +91,10 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>微服务开发流程？</li>
 </ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
+
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>
+
 </div>
     <div id="footer">Copyright © <span id="year"></span><a href="https://chajiuqqq.github.io/"> Chris.Cai Blog </a>
 <p>
@@ -124,12 +143,14 @@ function utterancesTheme(theme){
     iframe.contentWindow.postMessage(message,'https://utteranc.es');
 }
 if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
-console.log("\n %c Gmeek v2.16 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
+console.log("\n %c Gmeek v2.21 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
 </script>
 
 <script>
 document.getElementById("pathHome").setAttribute("d",IconList["home"]);
 document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
 
 function openComments(){
     cm=document.getElementById("comments");
@@ -167,7 +188,6 @@ function iFrameLoading(){
     }
 }
 </script>
-
 
 
 </html>

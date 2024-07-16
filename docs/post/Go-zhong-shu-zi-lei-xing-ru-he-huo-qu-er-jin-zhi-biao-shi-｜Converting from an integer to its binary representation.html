@@ -4,12 +4,67 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="//cdn.staticfile.net/Primer/21.0.7/primer.css" rel="stylesheet" />
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     <link rel="icon" href="http://meekdai.com/favicon.ico"><script>
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="Go中数字类型如何获取二进制表示｜Converting from an integer to its binary representation">
+<meta name="description" content="2种方法：
+
+```go
+num := int64(127)
+
+// 1
+res := strconv.FormatInt(num, 2)
+fmt.Println(res)
+
+// 2
+res = fmt.Sprintf('%b', num)
+fmt.Println(res)
+
+// 3
+res = fmt.Sprintf('%08b', num)
+fmt.Println(res)
+
+```
+
+```
+1111111
+1111111
+01111111
+```
+
+From: https://stackoverflow.com/questions/13870845/converting-from-an-integer-to-its-binary-representation。">
+<meta property="og:title" content="Go中数字类型如何获取二进制表示｜Converting from an integer to its binary representation">
+<meta property="og:description" content="2种方法：
+
+```go
+num := int64(127)
+
+// 1
+res := strconv.FormatInt(num, 2)
+fmt.Println(res)
+
+// 2
+res = fmt.Sprintf('%b', num)
+fmt.Println(res)
+
+// 3
+res = fmt.Sprintf('%08b', num)
+fmt.Println(res)
+
+```
+
+```
+1111111
+1111111
+01111111
+```
+
+From: https://stackoverflow.com/questions/13870845/converting-from-an-integer-to-its-binary-representation。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/Go-zhong-shu-zi-lei-xing-ru-he-huo-qu-er-jin-zhi-biao-shi-%EF%BD%9CConverting%20from%20an%20integer%20to%20its%20binary%20representation.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
 <title>Go中数字类型如何获取二进制表示｜Converting from an integer to its binary representation</title>
 <link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
@@ -85,8 +140,10 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </code></pre>
 <p>From: <a href="https://stackoverflow.com/questions/13870845/converting-from-an-integer-to-its-binary-representation" rel="nofollow">https://stackoverflow.com/questions/13870845/converting-from-an-integer-to-its-binary-representation</a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
+
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>
+
 </div>
     <div id="footer">Copyright © <span id="year"></span><a href="https://chajiuqqq.github.io/"> Chris.Cai Blog </a>
 <p>
@@ -135,12 +192,14 @@ function utterancesTheme(theme){
     iframe.contentWindow.postMessage(message,'https://utteranc.es');
 }
 if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
-console.log("\n %c Gmeek v2.16 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
+console.log("\n %c Gmeek v2.21 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
 </script>
 
 <script>
 document.getElementById("pathHome").setAttribute("d",IconList["home"]);
 document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
 
 function openComments(){
     cm=document.getElementById("comments");
@@ -178,7 +237,6 @@ function iFrameLoading(){
     }
 }
 </script>
-
 
 
 </html>

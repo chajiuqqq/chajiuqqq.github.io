@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Tue, 16 Jul 2024 02:56:11 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>SAP同步事件到业务系统性能优化</title><link>https://chajiuqqq.github.io//post/SAP-tong-bu-shi-jian-dao-ye-wu-xi-tong-xing-neng-you-hua.html</link><description>**背景**&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Tue, 16 Jul 2024 03:39:39 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>SAP同步事件到业务系统性能优化</title><link>https://chajiuqqq.github.io//post/SAP-tong-bu-shi-jian-dao-ye-wu-xi-tong-xing-neng-you-hua.html</link><description>**背景**&#13;
 EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/SAP-tong-bu-shi-jian-dao-ye-wu-xi-tong-xing-neng-you-hua.html</guid><pubDate>Tue, 16 Jul 2024 02:55:49 +0000</pubDate></item><item><title>go struct转proto message 的prompt</title><link>https://chajiuqqq.github.io//post/go%20struct-zhuan-proto%20message%20-de-prompt.html</link><description># prompt&#13;
 &#13;
 帮我把go的struct定义转为proto message定义&#13;
@@ -21,11 +21,11 @@ res := strconv.FormatInt(num, 2)&#13;
 fmt.Println(res)&#13;
 &#13;
 // 2&#13;
-res = fmt.Sprintf("%b", num)&#13;
+res = fmt.Sprintf('%b', num)&#13;
 fmt.Println(res)&#13;
 &#13;
 // 3&#13;
-res = fmt.Sprintf("%08b", num)&#13;
+res = fmt.Sprintf('%08b', num)&#13;
 fmt.Println(res)&#13;
 &#13;
 ```&#13;

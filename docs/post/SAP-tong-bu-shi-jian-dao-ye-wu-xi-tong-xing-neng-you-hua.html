@@ -4,12 +4,19 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="//cdn.staticfile.net/Primer/21.0.7/primer.css" rel="stylesheet" />
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     <link rel="icon" href="http://meekdai.com/favicon.ico"><script>
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="SAP同步事件到业务系统性能优化">
+<meta name="description" content="**背景**
+EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。">
+<meta property="og:title" content="SAP同步事件到业务系统性能优化">
+<meta property="og:description" content="**背景**
+EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/SAP-tong-bu-shi-jian-dao-ye-wu-xi-tong-xing-neng-you-hua.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
 <title>SAP同步事件到业务系统性能优化</title>
 
 
@@ -101,8 +108,10 @@ EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。上游�
 <p>事件处理流程：<br>
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/70d087f9-1734-4f9e-8fe1-2cfb6f6d1c69"><img src="https://github.com/user-attachments/assets/70d087f9-1734-4f9e-8fe1-2cfb6f6d1c69" alt="image" style="max-width: 100%;"></a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
+
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>
+
 </div>
     <div id="footer">Copyright © <span id="year"></span><a href="https://chajiuqqq.github.io/"> Chris.Cai Blog </a>
 <p>
@@ -151,12 +160,14 @@ function utterancesTheme(theme){
     iframe.contentWindow.postMessage(message,'https://utteranc.es');
 }
 if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
-console.log("\n %c Gmeek v2.16 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
+console.log("\n %c Gmeek v2.21 https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
 </script>
 
 <script>
 document.getElementById("pathHome").setAttribute("d",IconList["home"]);
 document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
 
 function openComments(){
     cm=document.getElementById("comments");
@@ -194,7 +205,6 @@ function iFrameLoading(){
     }
 }
 </script>
-
 
 
 </html>
