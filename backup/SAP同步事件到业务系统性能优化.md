@@ -23,6 +23,8 @@ EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。上游�
 3. 一次同步完成后，更新左边界，并重置右边界。注意这里要进行值拷贝，不然左右边界都会变成nil
 ![image](https://github.com/user-attachments/assets/7862432d-e328-41fc-90e5-4d9a37173c6b)
 
+4. 增量数据为空时，直接返回，不通知子系统
+![image](https://github.com/user-attachments/assets/075a05e3-4a56-4825-a36b-85f67e49af9a)
 
 事件处理流程：
 ![image](https://github.com/user-attachments/assets/70d087f9-1734-4f9e-8fe1-2cfb6f6d1c69)
