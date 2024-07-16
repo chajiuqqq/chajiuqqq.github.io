@@ -79,6 +79,21 @@ EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。上游�
 <li>采用滑动时间窗口同步，第一次窗口1970-now，第二次窗口now-now+1。比如第一次同步1970到2024-01-01的数据，全量更新，第二次就是2024-01-01到2024-01-01的数据</li>
 <li>当增量数据为空时，不通知子系统重载缓存，降低系统压力</li>
 </ol>
+<p><strong>代码实现</strong></p>
+<ol>
+<li>
+<p>增加时间窗口两个边界<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/e8eb017a-20ae-4115-9156-3136db50f498"><img src="https://github.com/user-attachments/assets/e8eb017a-20ae-4115-9156-3136db50f498" alt="image" style="max-width: 100%;"></a></p>
+</li>
+<li>
+<p>收到事件时，左边界初始化为1970，右边界取当前时间<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/09391548-95e7-49d0-8083-c4286b98f3ad"><img src="https://github.com/user-attachments/assets/09391548-95e7-49d0-8083-c4286b98f3ad" alt="image" style="max-width: 100%;"></a></p>
+</li>
+<li>
+<p>一次同步完成后，更新左边界，并重置右边界。注意这里要进行值拷贝，不然左右边界都会变成nil<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/7862432d-e328-41fc-90e5-4d9a37173c6b"><img src="https://github.com/user-attachments/assets/7862432d-e328-41fc-90e5-4d9a37173c6b" alt="image" style="max-width: 100%;"></a></p>
+</li>
+</ol>
 <p>事件处理流程：<br>
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/70d087f9-1734-4f9e-8fe1-2cfb6f6d1c69"><img src="https://github.com/user-attachments/assets/70d087f9-1734-4f9e-8fe1-2cfb6f6d1c69" alt="image" style="max-width: 100%;"></a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
