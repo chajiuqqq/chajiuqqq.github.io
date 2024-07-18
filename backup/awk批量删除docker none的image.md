@@ -53,3 +53,57 @@ Deleted: sha256:f2f5d096e2edd6e78f9c32934f1292b2ac59fd68e40e8903ba34a163c7e32503
 Deleted: sha256:8f93202d95990b66d21a1e324fbaf14a814e74be09cc39f53228452baa0469ab
 Deleted: sha256:6b802f894a8681c4c3ebdfb199e517cbece07b6716272dfed47d1835d92c8782
 ```
+
+## awk使用 //from gpt
+
+`awk` 是一个功能强大的文本处理工具，它可以用于从文件或标准输入中提取、处理和操作数据。`awk` 使用一种脚本语言，可以根据指定的模式进行数据匹配和处理。
+
+`awk` 的基本语法如下：
+
+```shell
+awk 'pattern { action }' file
+```
+
+其中，`pattern` 是用于匹配数据的模式，`action` 是在匹配成功时执行的动作。`file` 是要处理的文件名，可以省略，默认从标准输入中读取数据。
+
+下面是一些常用的 `awk` 用法示例：
+
+1. 打印整个文件：
+
+```shell
+awk '{print}' file
+```
+
+2. 按行打印文件：
+
+```shell
+awk '{print NR, $0}' file
+```
+
+3. 根据字段进行筛选和打印：
+
+```shell
+awk '$3 > 50 {print $1, $3}' file
+```
+
+4. 自定义字段分隔符：
+
+```shell
+awk -F ',' '{print $2}' file
+```
+
+5. 使用条件语句和循环：
+
+```shell
+awk '{if ($1 > 10) {print "Large"} else {print "Small"}}' file
+```
+
+6. 计算和统计数据：
+
+```shell
+awk '{sum += $1} END {print "Total:", sum}' file
+```
+
+这些只是 `awk` 的一些基本用法示例，实际上，`awk` 还提供了丰富的内置函数、数组和控制结构，可以进行更复杂的文本处理和数据操作。
+
+请注意，`awk` 的语法和功能非常灵活，可以根据具体的需求进行定制和扩展。你可以根据自己的需要编写更复杂的 `awk` 脚本以满足特定的文本处理任务。

@@ -54,7 +54,7 @@
 <meta property="og:url" content="https://chajiuqqq.github.io//post/awk-pi-liang-shan-chu-docker%20none-de-image.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
 <title>awk批量删除docker none的image</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 </head>
 <style>
@@ -163,7 +163,39 @@ Deleted: sha256:7c6de7d06887fb44241a93b933961cb5bc33c6f5820577c104aeea8cf5410582
 Deleted: sha256:f2f5d096e2edd6e78f9c32934f1292b2ac59fd68e40e8903ba34a163c7e32503
 Deleted: sha256:8f93202d95990b66d21a1e324fbaf14a814e74be09cc39f53228452baa0469ab
 Deleted: sha256:6b802f894a8681c4c3ebdfb199e517cbece07b6716272dfed47d1835d92c8782
-</code></pre></div>
+</code></pre>
+<h2>awk使用 //from gpt</h2>
+<p><code class="notranslate">awk</code> 是一个功能强大的文本处理工具，它可以用于从文件或标准输入中提取、处理和操作数据。<code class="notranslate">awk</code> 使用一种脚本语言，可以根据指定的模式进行数据匹配和处理。</p>
+<p><code class="notranslate">awk</code> 的基本语法如下：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">awk <span class="pl-s"><span class="pl-pds">'</span>pattern { action }<span class="pl-pds">'</span></span> file</pre></div>
+<p>其中，<code class="notranslate">pattern</code> 是用于匹配数据的模式，<code class="notranslate">action</code> 是在匹配成功时执行的动作。<code class="notranslate">file</code> 是要处理的文件名，可以省略，默认从标准输入中读取数据。</p>
+<p>下面是一些常用的 <code class="notranslate">awk</code> 用法示例：</p>
+<ol>
+<li>打印整个文件：</li>
+</ol>
+<div class="highlight highlight-source-shell"><pre class="notranslate">awk <span class="pl-s"><span class="pl-pds">'</span>{print}<span class="pl-pds">'</span></span> file</pre></div>
+<ol start="2">
+<li>按行打印文件：</li>
+</ol>
+<div class="highlight highlight-source-shell"><pre class="notranslate">awk <span class="pl-s"><span class="pl-pds">'</span>{print NR, $0}<span class="pl-pds">'</span></span> file</pre></div>
+<ol start="3">
+<li>根据字段进行筛选和打印：</li>
+</ol>
+<div class="highlight highlight-source-shell"><pre class="notranslate">awk <span class="pl-s"><span class="pl-pds">'</span>$3 &gt; 50 {print $1, $3}<span class="pl-pds">'</span></span> file</pre></div>
+<ol start="4">
+<li>自定义字段分隔符：</li>
+</ol>
+<div class="highlight highlight-source-shell"><pre class="notranslate">awk -F <span class="pl-s"><span class="pl-pds">'</span>,<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>{print $2}<span class="pl-pds">'</span></span> file</pre></div>
+<ol start="5">
+<li>使用条件语句和循环：</li>
+</ol>
+<div class="highlight highlight-source-shell"><pre class="notranslate">awk <span class="pl-s"><span class="pl-pds">'</span>{if ($1 &gt; 10) {print "Large"} else {print "Small"}}<span class="pl-pds">'</span></span> file</pre></div>
+<ol start="6">
+<li>计算和统计数据：</li>
+</ol>
+<div class="highlight highlight-source-shell"><pre class="notranslate">awk <span class="pl-s"><span class="pl-pds">'</span>{sum += $1} END {print "Total:", sum}<span class="pl-pds">'</span></span> file</pre></div>
+<p>这些只是 <code class="notranslate">awk</code> 的一些基本用法示例，实际上，<code class="notranslate">awk</code> 还提供了丰富的内置函数、数组和控制结构，可以进行更复杂的文本处理和数据操作。</p>
+<p>请注意，<code class="notranslate">awk</code> 的语法和功能非常灵活，可以根据具体的需求进行定制和扩展。你可以根据自己的需要编写更复杂的 <code class="notranslate">awk</code> 脚本以满足特定的文本处理任务。</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
