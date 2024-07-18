@@ -9,10 +9,10 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="**背景**
+<meta name="description" content="## 背景
 EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。">
 <meta property="og:title" content="SAP同步事件到业务系统性能优化">
-<meta property="og:description" content="**背景**
+<meta property="og:description" content="## 背景
 EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://chajiuqqq.github.io//post/SAP-tong-bu-shi-jian-dao-ye-wu-xi-tong-xing-neng-you-hua.html">
@@ -72,8 +72,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p><strong>背景</strong><br>
-EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。上游对接ERP，下游处理工厂生产、仓储、销售、采购业务。</p>
+<div class="markdown-body" id="postBody"><h2>背景</h2>
+<p>EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。上游对接ERP，下游处理工厂生产、仓储、销售、采购业务。</p>
 <p>需要从ERP平台同步单据、基础数据到EAP平台。单据同步采用ERP触发事件方式同步，基础数据采用轮询同步。</p>
 <p>问题在于轮询的实现，要求如下：</p>
 <ol>
@@ -81,12 +81,12 @@ EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。上游�
 <li>减少全量同步，避免子系统频繁rescache reload</li>
 </ol>
 <p>假设采用5分钟同步全部数据，导致实时性不高，提高频率会导致子系统频繁重载缓存。</p>
-<p><strong>解决方法</strong></p>
+<h2>解决方法</h2>
 <ol>
 <li>采用滑动时间窗口同步，第一次窗口1970-now，第二次窗口now-now+1。比如第一次同步1970到2024-01-01的数据，全量更新，第二次就是2024-01-01到2024-01-01的数据</li>
 <li>当增量数据为空时，不通知子系统重载缓存，降低系统压力</li>
 </ol>
-<p><strong>代码实现</strong></p>
+<h2>代码实现</h2>
 <ol>
 <li>
 <p>增加时间窗口两个边界<br>
@@ -105,8 +105,8 @@ EAP平台由多个子系统组成，比如MWMS、WMS、MES、OMS、EAP。上游�
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/075a05e3-4a56-4825-a36b-85f67e49af9a"><img src="https://github.com/user-attachments/assets/075a05e3-4a56-4825-a36b-85f67e49af9a" alt="image" style="max-width: 100%;"></a></p>
 </li>
 </ol>
-<p><strong>结果验证</strong><br>
-看到时间窗口变化：<br>
+<h2>结果验证</h2>
+<p>看到时间窗口变化：<br>
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/a0d47ce7-48a5-4be6-b479-cf20eb28ffb6"><img width="506" alt="企业微信截图_17210959141932" src="https://github.com/user-attachments/assets/a0d47ce7-48a5-4be6-b479-cf20eb28ffb6" style="max-width: 100%;"></a></p>
 <p>看到同步的记录数量变化：<br>
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/1f285f0c-6d0d-42d3-8dc0-dd868cdbb9b0"><img width="834" alt="企业微信截图_17210959238710" src="https://github.com/user-attachments/assets/1f285f0c-6d0d-42d3-8dc0-dd868cdbb9b0" style="max-width: 100%;"></a></p>
