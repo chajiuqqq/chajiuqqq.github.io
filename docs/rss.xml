@@ -1,5 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Thu, 18 Jul 2024 02:17:13 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>docker怎么在构建镜像时debug</title><link>https://chajiuqqq.github.io//post/docker-zen-me-zai-gou-jian-jing-xiang-shi-debug.html</link><description>https://devopscube.com/keep-docker-container-running/&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Thu, 18 Jul 2024 06:20:41 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>awk批量删除docker none的image</title><link>https://chajiuqqq.github.io//post/awk-pi-liang-shan-chu-docker%20none-de-image.html</link><description>1. 查看none镜像：&#13;
+```&#13;
+# docker image ls | grep none&#13;
+&lt;none&gt;                        &lt;none&gt;    01a4d5898ad0   39 minutes ago      867MB&#13;
+&lt;none&gt;                        &lt;none&gt;    950d8ca6051f   About an hour ago   973MB&#13;
+&lt;none&gt;                        &lt;none&gt;    cce3f6491395   2 hours ago         940MB&#13;
+&lt;none&gt;                        &lt;none&gt;    2e10b33cb6dd   3 hours ago         932MB&#13;
+&lt;none&gt;                        &lt;none&gt;    d616e7abf40c   3 hours ago         932MB&#13;
+&lt;none&gt;                        &lt;none&gt;    3565400a4b6e   4 hours ago         932MB&#13;
+&lt;none&gt;                        &lt;none&gt;    1a5f77c032b9   4 hours ago         932MB&#13;
+&lt;none&gt;                        &lt;none&gt;    a65b4e782623   4 hours ago         932MB&#13;
+&lt;none&gt;                        &lt;none&gt;    7c6de7d06887   5 hours ago         932MB&#13;
+&lt;none&gt;                        &lt;none&gt;    f2f5d096e2ed   5 hours ago         932MB&#13;
+&lt;none&gt;                        &lt;none&gt;    8f93202d9599   20 hours ago        932MB&#13;
+&lt;none&gt;                        &lt;none&gt;    6b802f894a86   21 hours ago        932MB&#13;
+```&#13;
+&#13;
+2. 过滤出imageID&#13;
+&#13;
+- awk 命令会默认以空格作为字段分隔符，并将每行视为一个记录。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/awk-pi-liang-shan-chu-docker%20none-de-image.html</guid><pubDate>Thu, 18 Jul 2024 06:20:09 +0000</pubDate></item><item><title>docker怎么在构建镜像时debug</title><link>https://chajiuqqq.github.io//post/docker-zen-me-zai-gou-jian-jing-xiang-shi-debug.html</link><description>https://devopscube.com/keep-docker-container-running/&#13;
 &#13;
 ## 背景&#13;
 &#13;
