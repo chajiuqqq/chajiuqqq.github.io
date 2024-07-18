@@ -86,6 +86,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </code></pre>
 <p>此时exit的话，容器直接停止了<br>
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/bdf9dde9-63f7-4368-a741-c1aaf5723d6f"><img src="https://github.com/user-attachments/assets/bdf9dde9-63f7-4368-a741-c1aaf5723d6f" alt="image" style="max-width: 100%;"></a></p>
+<p>注意，如果镜像指定了CMD或者ENTRYPOINT，容器会在执行完该命令后退出，无法持续running</p>
 <h2>方法2：让容器在后台keep running，然后exec进去</h2>
 <p>此时exit的话，容器还是running，可以多次exec进去</p>
 <pre class="notranslate"><code class="notranslate">docker run -it -d --name tty-container ubuntu /bin/bash
