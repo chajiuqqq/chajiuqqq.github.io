@@ -9,9 +9,17 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="https://devopscube.com/keep-docker-container-running/。">
+<meta name="description" content="https://devopscube.com/keep-docker-container-running/
+
+## 背景
+
+需要构建编译环境的镜像，但是直接docker build会出现很多错误，不好debug。">
 <meta property="og:title" content="[TODO]docker怎么在构建镜像时debug">
-<meta property="og:description" content="https://devopscube.com/keep-docker-container-running/。">
+<meta property="og:description" content="https://devopscube.com/keep-docker-container-running/
+
+## 背景
+
+需要构建编译环境的镜像，但是直接docker build会出现很多错误，不好debug。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://chajiuqqq.github.io//post/%5BTODO%5Ddocker-zen-me-zai-gou-jian-jing-xiang-shi-debug.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
@@ -70,7 +78,33 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p><a href="https://devopscube.com/keep-docker-container-running/" rel="nofollow">https://devopscube.com/keep-docker-container-running/</a></p></div>
+<div class="markdown-body" id="postBody"><p><a href="https://devopscube.com/keep-docker-container-running/" rel="nofollow">https://devopscube.com/keep-docker-container-running/</a></p>
+<h2>背景</h2>
+<p>需要构建编译环境的镜像，但是直接docker build会出现很多错误，不好debug。于是构建一个基础镜像，然后exec进去尝试好再写dockerfile，发现基础镜像run之后会立刻退出Exited(0)，于是寻找debug方法。</p>
+<h2>方法1：直接在没有ENTRYPOINT的容器打开一个交互tty</h2>
+<pre class="notranslate"><code class="notranslate">docker run -it --name tty-container ubuntu /bin/bash
+</code></pre>
+<p>此时exit的话，容器直接停止了<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/bdf9dde9-63f7-4368-a741-c1aaf5723d6f"><img src="https://github.com/user-attachments/assets/bdf9dde9-63f7-4368-a741-c1aaf5723d6f" alt="image" style="max-width: 100%;"></a></p>
+<h2>方法2：让容器在后台keep running，然后exec进去</h2>
+<p>此时exit的话，容器还是running，可以多次exec进去</p>
+<pre class="notranslate"><code class="notranslate">docker run -it -d --name tty-container ubuntu /bin/bash
+docker exec -it tty-container /bin/bash
+</code></pre>
+<p>注意，必须加-it，不然没有持续运行的进程，就直接退出了。<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/a661f62c-68ac-4294-b24b-24453d9fe23e"><img src="https://github.com/user-attachments/assets/a661f62c-68ac-4294-b24b-24453d9fe23e" alt="image" style="max-width: 100%;"></a></p>
+<h2>方法3：在run的最后添加tail命令让容器running</h2>
+<pre class="notranslate"><code class="notranslate"> docker run -d ubuntu tail -f /dev/null
+</code></pre>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/5ad9cb03-ed23-4e74-b8df-d9578f9ef373"><img src="https://github.com/user-attachments/assets/5ad9cb03-ed23-4e74-b8df-d9578f9ef373" alt="image" style="max-width: 100%;"></a></p>
+<h2>方法4：sleep infinity命令</h2>
+<p>sleep infinity也可以让容器running，再exec进去</p>
+<pre class="notranslate"><code class="notranslate">docker run -d ubuntu sleep infinity
+</code></pre>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/e58f0fc0-321f-4952-aad6-8327c1d48474"><img src="https://github.com/user-attachments/assets/e58f0fc0-321f-4952-aad6-8327c1d48474" alt="image" style="max-width: 100%;"></a></p>
+<h2>方法5：把能持续运行的命令加到dockerfile的ENTRYPOINT中</h2>
+<pre class="notranslate"><code class="notranslate">ENTRYPOINT ["tail", "-f", "/dev/null"]
+</code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
