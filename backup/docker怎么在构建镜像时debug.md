@@ -11,7 +11,7 @@ docker run -it --name tty-container ubuntu /bin/bash
 此时exit的话，容器直接停止了
 ![image](https://github.com/user-attachments/assets/bdf9dde9-63f7-4368-a741-c1aaf5723d6f)
 
-注意，如果镜像指定了CMD或者ENTRYPOINT，容器会在执行完该命令后退出，无法持续running
+注意，如果镜像指定了CMD或者ENTRYPOINT，容器会在执行完该命令后退出，无法持续running，可以用方法3替换。
 ## 方法2：让容器在后台keep running，然后exec进去
 
 此时exit的话，容器还是running，可以多次exec进去
