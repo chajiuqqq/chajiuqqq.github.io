@@ -1,5 +1,4 @@
 
-
 ## 背景
 SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？
 - 如果转为byte截取，会导致结尾乱码可能
@@ -9,7 +8,7 @@ SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中�
 利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。这样就可以规范截取合法的index，避免乱码。
 
 
-```
+```go
 func truncComments(in string) string {
 	// 按照长度25优雅截断utf8字符串
 	result := ""
@@ -28,7 +27,7 @@ func truncComments(in string) string {
 ```
 
 测试：
-```
+```go
 func TestTruncComments(t *testing.T) {
 	s := "123fff哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
 	o := truncComments(s)

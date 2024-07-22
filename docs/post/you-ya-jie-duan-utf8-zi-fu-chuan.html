@@ -10,7 +10,6 @@
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
 <meta name="description" content="
-
 ## 背景
 SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？
 - 如果转为byte截取，会导致结尾乱码可能
@@ -20,7 +19,6 @@ SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中�
 利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。">
 <meta property="og:title" content="优雅截断utf8字符串">
 <meta property="og:description" content="
-
 ## 背景
 SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？
 - 如果转为byte截取，会导致结尾乱码可能
@@ -32,7 +30,7 @@ SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中�
 <meta property="og:url" content="https://chajiuqqq.github.io//post/you-ya-jie-duan-utf8-zi-fu-chuan.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
 <title>优雅截断utf8字符串</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 </head>
 <style>
@@ -94,37 +92,35 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </ul>
 <h2>解决方法</h2>
 <p>利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。这样就可以规范截取合法的index，避免乱码。</p>
-<pre class="notranslate"><code class="notranslate">func truncComments(in string) string {
-	// 按照长度25优雅截断utf8字符串
-	result := ""
-	limit := 25
-	right := 0
-	for i := range in {
-		if i &lt;= limit {
-			right = i
-		} else {
-			break
+<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-k">func</span> <span class="pl-en">truncComments</span>(<span class="pl-s1">in</span> <span class="pl-smi">string</span>) <span class="pl-smi">string</span> {
+	<span class="pl-c">// 按照长度25优雅截断utf8字符串</span>
+	<span class="pl-s1">result</span> <span class="pl-c1">:=</span> <span class="pl-s">""</span>
+	<span class="pl-s1">limit</span> <span class="pl-c1">:=</span> <span class="pl-c1">25</span>
+	<span class="pl-s1">right</span> <span class="pl-c1">:=</span> <span class="pl-c1">0</span>
+	<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">:=</span> <span class="pl-k">range</span> <span class="pl-s1">in</span> {
+		<span class="pl-k">if</span> <span class="pl-s1">i</span> <span class="pl-c1">&lt;=</span> <span class="pl-s1">limit</span> {
+			<span class="pl-s1">right</span> <span class="pl-c1">=</span> <span class="pl-s1">i</span>
+		} <span class="pl-k">else</span> {
+			<span class="pl-k">break</span>
 		}
 	}
-	result = in[:right]
-	return result
-}
-</code></pre>
+	<span class="pl-s1">result</span> <span class="pl-c1">=</span> <span class="pl-s1">in</span>[:<span class="pl-s1">right</span>]
+	<span class="pl-k">return</span> <span class="pl-s1">result</span>
+}</pre></div>
 <p>测试：</p>
-<pre class="notranslate"><code class="notranslate">func TestTruncComments(t *testing.T) {
-	s := "123fff哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
-	o := truncComments(s)
-	fmt.Println(o)
-	fmt.Println(len([]byte(o)))
+<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-k">func</span> <span class="pl-en">TestTruncComments</span>(<span class="pl-s1">t</span> <span class="pl-c1">*</span>testing.<span class="pl-smi">T</span>) {
+	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-s">"123fff哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"</span>
+	<span class="pl-s1">o</span> <span class="pl-c1">:=</span> <span class="pl-en">truncComments</span>(<span class="pl-s1">s</span>)
+	<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s1">o</span>)
+	<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-en">len</span>([]<span class="pl-smi">byte</span>(<span class="pl-s1">o</span>)))
 }
 
-=== RUN   TestTruncComments
-123fff哈哈哈哈哈哈
-24
---- PASS: TestTruncComments (0.00s)
-PASS
-test end
-</code></pre>
+<span class="pl-c1">==</span><span class="pl-c1">=</span> <span class="pl-s1">RUN</span>   <span class="pl-s1">TestTruncComments</span>
+<span class="pl-c1">123</span><span class="pl-s1">fff哈哈哈哈哈哈</span>
+<span class="pl-c1">24</span>
+<span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-c1">-</span> <span class="pl-s1">PASS</span>: <span class="pl-en">TestTruncComments</span> (<span class="pl-c1">0.00</span><span class="pl-s1">s</span>)
+<span class="pl-s1">PASS</span>
+<span class="pl-s1">test</span> <span class="pl-s1">end</span></pre></div>
 <h2>reference</h2>
 <blockquote>
 <p><a href="https://stackoverflow.com/a/46416000" rel="nofollow">https://stackoverflow.com/a/46416000</a><br>
