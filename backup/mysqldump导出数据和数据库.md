@@ -14,3 +14,8 @@ mysqldump -uroot -proot --databases db1 db2 >/tmp/user.sql
 ```
 mysqldump -uroot -proot --no-data --databases db1 >/tmp/db1.sql
 ```
+
+4. 导出指定表
+```
+mysqldump -uroot -proot --databases db1 --tables a1 a2  >/tmp/db1.sql
+```

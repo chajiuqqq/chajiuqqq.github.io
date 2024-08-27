@@ -24,7 +24,13 @@ mysqldump -uroot -proot --databases db1 db2 >/tmp/user.sql
 3. 只导出表结构，不包含数据
 ```
 mysqldump -uroot -proot --no-data --databases db1 >/tmp/db1.sql
-```。">
+```
+
+4. 导出指定表
+```
+mysqldump -uroot -proot --databases db1 --tables a1 a2  >/tmp/db1.sql
+```
+。">
 <meta property="og:title" content="mysqldump导出数据和数据库">
 <meta property="og:description" content="> https://www.cnblogs.com/chenmh/p/5300370.html
 
@@ -41,7 +47,13 @@ mysqldump -uroot -proot --databases db1 db2 >/tmp/user.sql
 3. 只导出表结构，不包含数据
 ```
 mysqldump -uroot -proot --no-data --databases db1 >/tmp/db1.sql
-```。">
+```
+
+4. 导出指定表
+```
+mysqldump -uroot -proot --databases db1 --tables a1 a2  >/tmp/db1.sql
+```
+。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://chajiuqqq.github.io//post/mysqldump-dao-chu-shu-ju-he-shu-ju-ku.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
@@ -117,6 +129,11 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>只导出表结构，不包含数据</li>
 </ol>
 <pre class="notranslate"><code class="notranslate">mysqldump -uroot -proot --no-data --databases db1 &gt;/tmp/db1.sql
+</code></pre>
+<ol start="4">
+<li>导出指定表</li>
+</ol>
+<pre class="notranslate"><code class="notranslate">mysqldump -uroot -proot --databases db1 --tables a1 a2  &gt;/tmp/db1.sql
 </code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
