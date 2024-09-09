@@ -60,6 +60,7 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 
 # git cherry-pick
 - 拉取一个提交，并在当前分支添加一个新提交：`git cherry-pick <commit>`
+- 拉取前可重新编辑提交信息：`git cherry-pick -edit <commit>`
 - 拉取，但不作为commit提交，而是把变化加到stage：`git cherry-pick --no-commit <commit> `
 
 # Ref 
