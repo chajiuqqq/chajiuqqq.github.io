@@ -58,6 +58,10 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 
 其中<commit> 可以用 `HEAD~n`快捷表示。 `HEAD~1`表示当前指针的前一个提交。
 
+# git cherry-pick
+- 拉取一个提交，并在当前分支添加一个新提交：`git cherry-pick <commit>`
+- 拉取，但不作为commit提交，而是把变化加到stage：`git cherry-pick --no-commit <commit> `
+
 # Ref 
 - https://www.datacamp.com/tutorial/git-reset-revert-tutorial
 - https://sentry.io/answers/list-all-files-in-a-git-commit/

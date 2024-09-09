@@ -239,6 +239,11 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 <li><code class="notranslate">git reset --hard &lt;commit&gt;</code>： <strong>dangerous</strong> 删除指定提交之后的所有本地修改（包括staged），重置为commit的状态</li>
 </ul>
 <p>其中 可以用 <code class="notranslate">HEAD~n</code>快捷表示。 <code class="notranslate">HEAD~1</code>表示当前指针的前一个提交。</p>
+<h1>git cherry-pick</h1>
+<ul>
+<li>拉取一个提交，并在当前分支添加一个新提交：<code class="notranslate">git cherry-pick &lt;commit&gt;</code></li>
+<li>拉取，但不作为commit提交，而是把变化加到stage：<code class="notranslate">git cherry-pick --no-commit &lt;commit&gt; </code></li>
+</ul>
 <h1>Ref</h1>
 <ul>
 <li><a href="https://www.datacamp.com/tutorial/git-reset-revert-tutorial" rel="nofollow">https://www.datacamp.com/tutorial/git-reset-revert-tutorial</a></li>
