@@ -63,6 +63,9 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 - 拉取前可重新编辑提交信息：`git cherry-pick -edit <commit>`
 - 拉取，但不作为commit提交，而是把变化加到stage：`git cherry-pick --no-commit <commit> `
 
+# git push
+- 推送本地分支到远程，并创建追踪：`git push -u origin <branch-name>`，此时远程分支名称会和本地一样。`-u` 是` --set-upstream`的简写。
+-  可以手动指定远程的分支名称：`git push -u origin branchB:branchB`
 # Ref 
 - https://www.datacamp.com/tutorial/git-reset-revert-tutorial
 - https://sentry.io/answers/list-all-files-in-a-git-commit/

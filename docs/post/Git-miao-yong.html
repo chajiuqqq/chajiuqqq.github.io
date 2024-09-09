@@ -245,6 +245,11 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 <li>拉取前可重新编辑提交信息：<code class="notranslate">git cherry-pick -edit &lt;commit&gt;</code></li>
 <li>拉取，但不作为commit提交，而是把变化加到stage：<code class="notranslate">git cherry-pick --no-commit &lt;commit&gt; </code></li>
 </ul>
+<h1>git push</h1>
+<ul>
+<li>推送本地分支到远程，并创建追踪：<code class="notranslate">git push -u origin &lt;branch-name&gt;</code>，此时远程分支名称会和本地一样。<code class="notranslate">-u</code> 是<code class="notranslate"> --set-upstream</code>的简写。</li>
+<li>可以手动指定远程的分支名称：<code class="notranslate">git push -u origin branchB:branchB</code></li>
+</ul>
 <h1>Ref</h1>
 <ul>
 <li><a href="https://www.datacamp.com/tutorial/git-reset-revert-tutorial" rel="nofollow">https://www.datacamp.com/tutorial/git-reset-revert-tutorial</a></li>
