@@ -1,6 +1,8 @@
 # 用例
 - **查看commit提交的细节，会展示文件变化细节**：`git show <commit>` OR `git log -p`
 - **查看commit中提交的文件名称**：`git show --name-status <commit>`
+- git merge出现冲突时，不想处理冲突，取消合并：`git merge --abort`
+- 如果已经merge了，要回退，用`git reset `或 `git revert`
 
 ```
 $  git show --name-status 1e7cf253a6e6e
@@ -57,6 +59,21 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 - `git reset --hard <commit>`： **dangerous** 删除指定提交之后的所有本地修改（包括staged），重置为commit的状态
 
 其中<commit> 可以用 `HEAD~n`快捷表示。 `HEAD~1`表示当前指针的前一个提交。
+
+> git reset和git revert的区别
+
+**git reset：**
+
+直接修改提交历史。当你在本地进行更改且还没有推送到远程仓库时，适合使用 git reset 来修改提交历史。
+通常用于清理本地开发历史或撤销误提交。
+使用：`git reset --hard HEAD~1`
+
+**git revert：**
+
+创建一个新的提交，用来“撤销”之前某个提交的更改。当某个提交已经被推送到远程仓库，且你不想破坏历史时，应使用 git revert 来“撤销”某个提交。
+在协作环境中，推荐使用 git revert，因为它不会影响其他开发者的历史。
+
+使用：`git revert <commit>`
 
 # git cherry-pick
 - 拉取一个提交，并在当前分支添加一个新提交：`git cherry-pick <commit>`

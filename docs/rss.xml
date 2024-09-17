@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Sat, 07 Sep 2024 14:27:26 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>Git妙用</title><link>https://chajiuqqq.github.io//post/Git-miao-yong.html</link><description># 用例&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Tue, 17 Sep 2024 07:24:31 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>Git妙用</title><link>https://chajiuqqq.github.io//post/Git-miao-yong.html</link><description># 用例&#13;
 - **查看commit提交的细节，会展示文件变化细节**：`git show &lt;commit&gt;` OR `git log -p`&#13;
 - **查看commit中提交的文件名称**：`git show --name-status &lt;commit&gt;`&#13;
+- git merge出现冲突时，不想处理冲突，取消合并：`git merge --abort`&#13;
+- 如果已经merge了，要回退，用`git reset `或 `git revert`&#13;
 &#13;
 ```&#13;
 $  git show --name-status 1e7cf253a6e6e&#13;

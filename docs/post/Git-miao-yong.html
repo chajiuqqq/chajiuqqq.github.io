@@ -12,6 +12,8 @@
 <meta name="description" content="# 用例
 - **查看commit提交的细节，会展示文件变化细节**：`git show <commit>` OR `git log -p`
 - **查看commit中提交的文件名称**：`git show --name-status <commit>`
+- git merge出现冲突时，不想处理冲突，取消合并：`git merge --abort`
+- 如果已经merge了，要回退，用`git reset `或 `git revert`
 
 ```
 $  git show --name-status 1e7cf253a6e6e
@@ -68,6 +70,8 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 <meta property="og:description" content="# 用例
 - **查看commit提交的细节，会展示文件变化细节**：`git show <commit>` OR `git log -p`
 - **查看commit中提交的文件名称**：`git show --name-status <commit>`
+- git merge出现冲突时，不想处理冲突，取消合并：`git merge --abort`
+- 如果已经merge了，要回退，用`git reset `或 `git revert`
 
 ```
 $  git show --name-status 1e7cf253a6e6e
@@ -182,6 +186,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <ul>
 <li><strong>查看commit提交的细节，会展示文件变化细节</strong>：<code class="notranslate">git show &lt;commit&gt;</code> OR <code class="notranslate">git log -p</code></li>
 <li><strong>查看commit中提交的文件名称</strong>：<code class="notranslate">git show --name-status &lt;commit&gt;</code></li>
+<li>git merge出现冲突时，不想处理冲突，取消合并：<code class="notranslate">git merge --abort</code></li>
+<li>如果已经merge了，要回退，用<code class="notranslate">git reset </code>或 <code class="notranslate">git revert</code></li>
 </ul>
 <pre class="notranslate"><code class="notranslate">$  git show --name-status 1e7cf253a6e6e
 commit 1e7cf253a6e6ecee6376b12d9fcabf2ec3f7f9e6 (EH-1699)
@@ -239,6 +245,17 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 <li><code class="notranslate">git reset --hard &lt;commit&gt;</code>： <strong>dangerous</strong> 删除指定提交之后的所有本地修改（包括staged），重置为commit的状态</li>
 </ul>
 <p>其中 可以用 <code class="notranslate">HEAD~n</code>快捷表示。 <code class="notranslate">HEAD~1</code>表示当前指针的前一个提交。</p>
+<blockquote>
+<p>git reset和git revert的区别</p>
+</blockquote>
+<p><strong>git reset：</strong></p>
+<p>直接修改提交历史。当你在本地进行更改且还没有推送到远程仓库时，适合使用 git reset 来修改提交历史。<br>
+通常用于清理本地开发历史或撤销误提交。<br>
+使用：<code class="notranslate">git reset --hard HEAD~1</code></p>
+<p><strong>git revert：</strong></p>
+<p>创建一个新的提交，用来“撤销”之前某个提交的更改。当某个提交已经被推送到远程仓库，且你不想破坏历史时，应使用 git revert 来“撤销”某个提交。<br>
+在协作环境中，推荐使用 git revert，因为它不会影响其他开发者的历史。</p>
+<p>使用：<code class="notranslate">git revert &lt;commit&gt;</code></p>
 <h1>git cherry-pick</h1>
 <ul>
 <li>拉取一个提交，并在当前分支添加一个新提交：<code class="notranslate">git cherry-pick &lt;commit&gt;</code></li>
