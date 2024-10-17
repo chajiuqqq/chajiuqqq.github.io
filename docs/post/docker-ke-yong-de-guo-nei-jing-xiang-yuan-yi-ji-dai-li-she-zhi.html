@@ -9,7 +9,8 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="这几个可用，参考https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6
+<meta name="description" content="# 源
+这几个可用，参考https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6
 ```
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
@@ -25,9 +26,13 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
-```。">
+```
+# 代理设置
+docker pull 拉取镜像时设置代理
+docker 的代理设置是一件比较麻烦的事情，很容易出问题，但是弄懂了也还是比较清楚。">
 <meta property="og:title" content="docker可用的国内镜像源以及代理设置">
-<meta property="og:description" content="这几个可用，参考https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6
+<meta property="og:description" content="# 源
+这几个可用，参考https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6
 ```
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
@@ -43,7 +48,10 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
-```。">
+```
+# 代理设置
+docker pull 拉取镜像时设置代理
+docker 的代理设置是一件比较麻烦的事情，很容易出问题，但是弄懂了也还是比较清楚。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://chajiuqqq.github.io//post/docker-ke-yong-de-guo-nei-jing-xiang-yuan-yi-ji-dai-li-she-zhi.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
@@ -102,7 +110,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>这几个可用，参考<a href="https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6">https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6</a></p>
+<div class="markdown-body" id="postBody"><h1>源</h1>
+<p>这几个可用，参考<a href="https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6">https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6</a></p>
 <pre class="notranslate"><code class="notranslate">sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'
 {
@@ -117,7 +126,36 @@ sudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
-</code></pre></div>
+</code></pre>
+<h1>代理设置</h1>
+<p>docker pull 拉取镜像时设置代理<br>
+docker 的代理设置是一件比较麻烦的事情，很容易出问题，但是弄懂了也还是比较清楚。</p>
+<p>首先， docker pull 和 docker build/docker run 使用代理的方式不一样！</p>
+<p>docker pull 的代理被 systemd 接管，所以需要设置 systemd…</p>
+<pre class="notranslate"><code class="notranslate">sudo vim /etc/systemd/system/docker.service.d/http-proxy.conf
+</code></pre>
+<pre class="notranslate"><code class="notranslate">[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:8123"
+Environment="HTTPS_PROXY=http://127.0.0.1:8123"
+</code></pre>
+<p>这里的127.0.0.1是直接用了本机的 http 代理，然后重启服务才能生效。</p>
+<pre class="notranslate"><code class="notranslate">sudo systemctl daemon-reload
+sudo systemctl restart docker
+</code></pre>
+<blockquote>
+<p>如果是wsl2，也写为127.0.0.1，同时.wslconfig里这么配置：</p>
+</blockquote>
+<pre class="notranslate"><code class="notranslate">[wsl2]
+networkingMode=mirrored
+dnsTunneling=true
+firewall=true
+autoProxy=true
+
+[experimental]
+hostAddressLoopback=true
+</code></pre>
+<p>可以通过<code class="notranslate">sudo systemctl show --property=Environment docker</code>看到设置的环境变量。</p>
+<p>然后docker pull就会使用代理啦！</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
