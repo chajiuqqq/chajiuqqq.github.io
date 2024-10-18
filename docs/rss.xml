@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Thu, 17 Oct 2024 08:28:07 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>[TODO]如何设置你的服务器</title><link>https://chajiuqqq.github.io//post/%5BTODO%5D-ru-he-she-zhi-ni-de-fu-wu-qi.html</link><description>&gt; https://becomesovran.com/blog/server-setup-basics.html&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Fri, 18 Oct 2024 01:34:46 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>[TODO]如何设置你的服务器</title><link>https://chajiuqqq.github.io//post/%5BTODO%5D-ru-he-she-zhi-ni-de-fu-wu-qi.html</link><description>&gt; https://becomesovran.com/blog/server-setup-basics.html&#13;
 &#13;
 # SSH&#13;
 1. 创建新用户&#13;
@@ -114,7 +114,8 @@ SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中�
 - 无法按照字符个数截取，因为可能中英文数字混合输入&#13;
 &#13;
 ## 解决方法&#13;
-利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/you-ya-jie-duan-utf8-zi-fu-chuan.html</guid><pubDate>Mon, 22 Jul 2024 03:47:36 +0000</pubDate></item><item><title>docker可用的国内镜像源以及代理设置</title><link>https://chajiuqqq.github.io//post/docker-ke-yong-de-guo-nei-jing-xiang-yuan-yi-ji-dai-li-she-zhi.html</link><description># 源&#13;
+利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/you-ya-jie-duan-utf8-zi-fu-chuan.html</guid><pubDate>Mon, 22 Jul 2024 03:47:36 +0000</pubDate></item><item><title>docker可用的国内镜像源以及代理设置</title><link>https://chajiuqqq.github.io//post/docker-ke-yong-de-guo-nei-jing-xiang-yuan-yi-ji-dai-li-she-zhi.html</link><description>&gt; https://neucrack.com/p/286&#13;
+# 源&#13;
 这几个可用，参考https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6&#13;
 ```&#13;
 sudo mkdir -p /etc/docker&#13;
