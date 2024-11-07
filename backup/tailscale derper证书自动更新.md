@@ -34,7 +34,8 @@ Exec命令中
 - ssh部署，选择密码或者私钥用于连接和部署
 ![image](https://github.com/user-attachments/assets/6a4ee66c-9533-4f90-90fd-6b31d8f1ed39)
 - 注意证书路径需要为`certdir`指向的，`sudo systemctl restart derper`作为更新证书后的命令重启derper
-![image](https://github.com/user-attachments/assets/e97f1a0f-71b0-479e-8272-dcd36d8b681f)
+![image](https://github.com/user-attachments/assets/0f5f2dfd-ec4e-4f74-b71f-546d7907126f)
+
 
 ### 3. 效果，显示到期时间以及到期后自动部署：
 ![image](https://github.com/user-attachments/assets/6e93f103-16d8-4659-b099-6094feba39be)
