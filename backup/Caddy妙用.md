@@ -111,6 +111,36 @@ a.com, www.a.com, c.com {
 - 自动获取证书：Caddy 会为每个域名自动获取 HTTPS 证书，所以确保这些域名已指向你的 Caddy 服务器 IP 地址，并且服务器开放了 80 和 443 端口。
 - 泛域名支持：Caddy 也支持使用泛域名，例如 *.a.com，可以处理子域名。
 
+> caddy配置域名反向代理到github.io为什么返回显示404，配置如下：
+```
+blog.chajiuqqq.cn, blogs.chajiuqqq.cn {
+    reverse_proxy https://chajiuqqq.github.io
+}
+```
+
+将 Caddy 配置为反向代理到 GitHub Pages 站点时，可能会遇到 404 错误。这通常是因为 GitHub Pages 的服务器要求请求的 `Host` 头与 GitHub Pages 的域名匹配（例如 `chajiuqqq.github.io`），而你的请求使用了自定义域名（如 `blog.chajiuqqq.cn`），因此返回了 404。
+
+要解决这个问题，可以在 Caddy 配置中添加一个 `header_up Host` 参数，使 Caddy 在转发请求时将 `Host` 头修改为目标站点的主机名。配置如下：
+
+```caddy
+blog.chajiuqqq.cn, blogs.chajiuqqq.cn {
+    reverse_proxy https://chajiuqqq.github.io {
+        header_up Host chajiuqqq.github.io
+    }
+}
+```
+
+### 配置说明
+
+- `header_up Host chajiuqqq.github.io`：告诉 Caddy 在将请求转发到 GitHub Pages 时，将 `Host` 头替换为 `chajiuqqq.github.io`，以便 GitHub Pages 识别并返回正确的内容。
+
+### 注意事项
+
+1. **SSL 证书**：Caddy 会自动为 `blog.chajiuqqq.cn` 和 `blogs.chajiuqqq.cn` 申请 HTTPS 证书，你的用户可以通过 HTTPS 访问你的自定义域名。
+2. **GitHub Pages 设置**：确保在 GitHub Pages 仓库的设置中添加了 `blog.chajiuqqq.cn` 或 `blogs.chajiuqqq.cn` 作为自定义域名，否则可能会出现证书或访问错误。
+
+这样，Caddy 就会把请求正确地反向代理到 GitHub Pages，并且返回内容不会出现 404 错误。
+
 > caddy是如何自动申请证书的
 
 Caddy 通过集成的自动化流程，为你的网站申请和管理 SSL/TLS 证书，使你的站点可以自动获得 HTTPS 保护。它的自动申请和更新证书功能主要依赖于 [Let's Encrypt](https://letsencrypt.org) 或 [ZeroSSL](https://zerossl.com) 等 ACME 协议兼容的证书颁发机构 (CA)。以下是 Caddy 如何实现自动申请证书的具体流程：
