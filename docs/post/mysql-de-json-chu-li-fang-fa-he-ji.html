@@ -10,17 +10,16 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="
-## 更新json中的某个属性
+<meta name="description" content="## 更新json中的某个属性
 
 写一个mysql的sql，property列存储了json，格式是
-```
+```json
 {'common': {'code': 'HU001'}, 'factory_code': '2010', 'factory_name': '匈牙利恩捷', 'work_shop_type': 1}
 ```
 要求把factory_name从'匈牙利恩捷'更新为'SEMCORP Hungary Kft'
 
 SQL:
-```
+```sql
 UPDATE category_0
 SET property = JSON_SET(property, '$.factory_name', 'SEMCORP Hungary Kft')
 WHERE JSON_UNQUOTE(JSON_EXTRACT(property, '$.factory_name')) = '匈牙利恩捷';
@@ -28,17 +27,16 @@ WHERE JSON_UNQUOTE(JSON_EXTRACT(property, '$.factory_name')) = '匈牙利恩捷'
 解释：
 - JSON_EXTRACT(property, '$.factory_name')：从JSON对象中提取factory_name的值。">
 <meta property="og:title" content="mysql的json处理方法合集">
-<meta property="og:description" content="
-## 更新json中的某个属性
+<meta property="og:description" content="## 更新json中的某个属性
 
 写一个mysql的sql，property列存储了json，格式是
-```
+```json
 {'common': {'code': 'HU001'}, 'factory_code': '2010', 'factory_name': '匈牙利恩捷', 'work_shop_type': 1}
 ```
 要求把factory_name从'匈牙利恩捷'更新为'SEMCORP Hungary Kft'
 
 SQL:
-```
+```sql
 UPDATE category_0
 SET property = JSON_SET(property, '$.factory_name', 'SEMCORP Hungary Kft')
 WHERE JSON_UNQUOTE(JSON_EXTRACT(property, '$.factory_name')) = '匈牙利恩捷';
@@ -49,7 +47,7 @@ WHERE JSON_UNQUOTE(JSON_EXTRACT(property, '$.factory_name')) = '匈牙利恩捷'
 <meta property="og:url" content="https://chajiuqqq.github.io//post/mysql-de-json-chu-li-fang-fa-he-ji.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
 <title>mysql的json处理方法合集</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
 </head>
@@ -106,14 +104,12 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <div id="content">
 <div class="markdown-body" id="postBody"><h2>更新json中的某个属性</h2>
 <p>写一个mysql的sql，property列存储了json，格式是</p>
-<pre class="notranslate"><code class="notranslate">{"common": {"code": "HU001"}, "factory_code": "2010", "factory_name": "匈牙利恩捷", "work_shop_type": 1}
-</code></pre>
+<div class="highlight highlight-source-json"><pre class="notranslate">{<span class="pl-ent">"common"</span>: {<span class="pl-ent">"code"</span>: <span class="pl-s"><span class="pl-pds">"</span>HU001<span class="pl-pds">"</span></span>}, <span class="pl-ent">"factory_code"</span>: <span class="pl-s"><span class="pl-pds">"</span>2010<span class="pl-pds">"</span></span>, <span class="pl-ent">"factory_name"</span>: <span class="pl-s"><span class="pl-pds">"</span>匈牙利恩捷<span class="pl-pds">"</span></span>, <span class="pl-ent">"work_shop_type"</span>: <span class="pl-c1">1</span>}</pre></div>
 <p>要求把factory_name从"匈牙利恩捷"更新为"SEMCORP Hungary Kft"</p>
 <p>SQL:</p>
-<pre class="notranslate"><code class="notranslate">UPDATE category_0
-SET property = JSON_SET(property, '$.factory_name', 'SEMCORP Hungary Kft')
-WHERE JSON_UNQUOTE(JSON_EXTRACT(property, '$.factory_name')) = '匈牙利恩捷';
-</code></pre>
+<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">UPDATE</span> category_0
+<span class="pl-k">SET</span> property <span class="pl-k">=</span> JSON_SET(property, <span class="pl-s"><span class="pl-pds">'</span>$.factory_name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>SEMCORP Hungary Kft<span class="pl-pds">'</span></span>)
+<span class="pl-k">WHERE</span> JSON_UNQUOTE(JSON_EXTRACT(property, <span class="pl-s"><span class="pl-pds">'</span>$.factory_name<span class="pl-pds">'</span></span>)) <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>匈牙利恩捷<span class="pl-pds">'</span></span>;</pre></div>
 <p>解释：</p>
 <ul>
 <li>JSON_EXTRACT(property, '$.factory_name')：从JSON对象中提取factory_name的值。</li>
@@ -121,13 +117,60 @@ WHERE JSON_UNQUOTE(JSON_EXTRACT(property, '$.factory_name')) = '匈牙利恩捷'
 <li>JSON_SET(property, '$.factory_name', 'SEMCORP Hungary Kft')：将factory_name的值更新为SEMCORP Hungary Kft。</li>
 </ul>
 <h2>查询json的某个字段</h2>
-<pre class="notranslate"><code class="notranslate">SELECT JSON_UNQUOTE(JSON_EXTRACT(property, '$.location_identifier')) from category_0;
-</code></pre>
+<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">SELECT</span> JSON_UNQUOTE(JSON_EXTRACT(property, <span class="pl-s"><span class="pl-pds">'</span>$.location_identifier<span class="pl-pds">'</span></span>)) <span class="pl-k">from</span> category_0;</pre></div>
 <p>解释：</p>
 <ul>
 <li>JSON_EXTRACT(property, '$.factory_name')：从JSON对象中提取factory_name的值。</li>
 <li>JSON_UNQUOTE()：去掉提取的JSON值中的引号，使其成为字符串。</li>
-</ul></div>
+</ul>
+<h2>更新数组</h2>
+<p>假设某列存储了以下json：</p>
+<div class="highlight highlight-source-json"><pre class="notranslate">[
+  {
+    <span class="pl-ent">"Code"</span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    <span class="pl-ent">"Cargos"</span>: [
+      {
+        <span class="pl-ent">"Code"</span>: <span class="pl-s"><span class="pl-pds">"</span>39td2vv96xt9inh<span class="pl-pds">"</span></span>,
+        <span class="pl-ent">"Type"</span>: <span class="pl-c1">1</span>,
+        <span class="pl-ent">"Detail"</span>: {
+          <span class="pl-ent">"BatchNum"</span>: <span class="pl-s"><span class="pl-pds">"</span>240722001<span class="pl-pds">"</span></span>,
+          <span class="pl-ent">"Quantity"</span>: <span class="pl-c1">1000000</span>
+        }
+      }
+    ]
+  },
+  {
+    <span class="pl-ent">"Code"</span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    <span class="pl-ent">"Cargos"</span>: [
+      {
+        <span class="pl-ent">"Code"</span>: <span class="pl-s"><span class="pl-pds">"</span>a1b2c3d4e5<span class="pl-pds">"</span></span>,
+        <span class="pl-ent">"Type"</span>: <span class="pl-c1">2</span>,
+        <span class="pl-ent">"Detail"</span>: {
+          <span class="pl-ent">"BatchNum"</span>: <span class="pl-s"><span class="pl-pds">"</span>240722002<span class="pl-pds">"</span></span>,
+          <span class="pl-ent">"Quantity"</span>: <span class="pl-c1">2000000</span>
+        }
+      }
+    ]
+  }
+]</pre></div>
+<ul>
+<li>按照索引更新数组里的对象：</li>
+</ul>
+<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">UPDATE</span> your_table
+<span class="pl-k">SET</span> json_column <span class="pl-k">=</span> JSON_SET(
+    json_column,
+    <span class="pl-s"><span class="pl-pds">'</span>$[0].Cargos[0].Detail.BatchNum<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>新的批号<span class="pl-pds">'</span></span>
+)
+<span class="pl-k">WHERE</span> <span class="pl-k">&lt;</span>condition<span class="pl-k">&gt;</span>;</pre></div>
+<ul>
+<li>更新数组的每个对象的元素：</li>
+</ul>
+<div class="highlight highlight-source-sql"><pre class="notranslate"><span class="pl-k">UPDATE</span> your_table
+<span class="pl-k">SET</span> json_column <span class="pl-k">=</span> JSON_SET(
+    json_column,
+    <span class="pl-s"><span class="pl-pds">'</span>$[*].Cargos[*].Detail.BatchNum<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>新的批号<span class="pl-pds">'</span></span>
+)
+<span class="pl-k">WHERE</span> <span class="pl-k">&lt;</span>condition<span class="pl-k">&gt;</span>;</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
