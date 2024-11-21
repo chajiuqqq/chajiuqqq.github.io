@@ -1,8 +1,6 @@
 # 用例
 - **查看commit提交的细节，会展示文件变化细节**：`git show <commit>` OR `git log -p`
 - **查看commit中提交的文件名称**：`git show --name-status <commit>`
-- git merge出现冲突时，不想处理冲突，取消合并：`git merge --abort`
-- 如果已经merge了，要回退，用`git reset `或 `git revert`
 
 ```
 $  git show --name-status 1e7cf253a6e6e
@@ -17,6 +15,11 @@ M       oms/pkg/proto/oms_order_v3.proto
 M       rfcctl/types/mm.go
 M       webproto
 ```
+
+- git merge出现冲突时，不想处理冲突，取消合并：`git merge --abort`
+- 如果已经merge了，要回退，用`git reset `或 `git revert`
+- **误add了不想commit的文件到暂存区，怎么删除？** `git restore --staged <文件> `：将暂存区中的文件替换为仓库中某个提交的版本（默认为 HEAD）。这相当于取消暂存该文件。
+
 # git stash
 ```
  git stash -h
@@ -52,6 +55,7 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 - 暂存staged和untracked文件： `git stash -u`
 - 应用stash并从stash列表中删除：`git stash pop`
 - 应用stash但不删除stash记录：`git stash apply`
+- 查看某个stash的内容：`git stash show 0`
 
 # git reset 
 - `git reset --soft <commit>`：撤回提交并把变化存入stage区，不会丢弃本地文件的其他更改。
@@ -83,6 +87,24 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 # git push
 - 推送本地分支到远程，并创建追踪：`git push -u origin <branch-name>`，此时远程分支名称会和本地一样。`-u` 是` --set-upstream`的简写。
 -  可以手动指定远程的分支名称：`git push -u origin branchB:branchB`
+
+# git restore
+用于将暂存区/某个提交的版本覆盖到工作区/暂存区。
+
+**误add了不想commit的文件到暂存区，怎么删除？**
+
+`git restore --staged <文件> `：将暂存区中的文件替换为仓库中某个提交的版本（默认为 HEAD）。这相当于取消暂存该文件。
+
+- **从暂存区恢复到工作目录**: git restore <文件> 会将工作目录中的文件替换为暂存区中的版本。如果暂存区中没有该文件，则会从工作目录中删除该文件。
+- **从仓库中的某个提交恢复到工作目录**: git restore --source=<提交> <文件> 会将工作目录中的文件替换为指定提交中的版本。
+- **从仓库中的某个提交恢复到暂存区**: git restore --source=<提交> --staged <文件> 会将暂存区中的文件替换为指定提交中的版本。
+- **从仓库中的某个提交恢复到工作目录和暂存区**: git restore --source=<提交> --staged --worktree <文件> 会同时将工作目录和暂存区中的文件替换为指定提交中的版本。
+
+> **也就是可以用选项指定源头和目标：**
+> `--source=<提交>`: 指定恢复文件的来源提交。可以是提交哈希值、分支名或标签名。默认为 HEAD。
+> `--staged`: 指定恢复目标为暂存区。
+> `--worktree`: 指定恢复目标为工作目录。
+
 # Ref 
 - https://www.datacamp.com/tutorial/git-reset-revert-tutorial
 - https://sentry.io/answers/list-all-files-in-a-git-commit/
