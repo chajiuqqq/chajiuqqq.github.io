@@ -105,6 +105,15 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 > `--staged`: 指定恢复目标为暂存区。
 > `--worktree`: 指定恢复目标为工作目录。
 
+---
+**HEAD~2和HEAD^2有什么区别**
+HEAD~2用于向上追溯找到前2个提交
+HEAD^2用于找到第二个父提交（HEAD必须是merge节点）
+![image](https://github.com/user-attachments/assets/7d993140-155b-4b8d-8d50-742d386a92fa)
+
+HEAD^ 和 HEAD~ 在大多数情况下指向同一个提交
+
+
 # Ref 
 - https://www.datacamp.com/tutorial/git-reset-revert-tutorial
 - https://sentry.io/answers/list-all-files-in-a-git-commit/
