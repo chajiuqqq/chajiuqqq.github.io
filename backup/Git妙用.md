@@ -56,6 +56,7 @@ stash@{7}: WIP on EH-1136: 70d7b5dd oms:db update
 - 应用stash并从stash列表中删除：`git stash pop`
 - 应用stash但不删除stash记录：`git stash apply`
 - 查看某个stash的内容：`git stash show 0`
+- 暂存指定文件：` git stash -m "ordSrv" -- oms/pkg/proto/orderservice_v3.go`
 
 # git reset 
 - `git reset --soft <commit>`：撤回提交并把变化存入stage区，不会丢弃本地文件的其他更改。
