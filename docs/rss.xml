@@ -1,5 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Thu, 21 Nov 2024 06:14:16 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>群晖安装ipkg管理工具</title><link>https://chajiuqqq.github.io//post/qun-hui-an-zhuang-ipkg-guan-li-gong-ju.html</link><description>&gt; https://www.landiannews.com/archives/92174.html&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Mon, 25 Nov 2024 02:40:42 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>好用的终端</title><link>https://chajiuqqq.github.io//post/hao-yong-de-zhong-duan.html</link><description>1. [alacritty](https://github.com/alacritty/alacritty)&#13;
+alacritty效果优化：https://tw93.fun/2023-02-06/alacritty.html&#13;
+&#13;
+2. [tmux](https://github.com/tmux/tmux)&#13;
+教程：https://www.ruanyifeng.com/blog/2019/10/tmux.html&#13;
+&#13;
+3. [fishshell](https://fishshell.com/)&#13;
+[Fisher](https://github.com/jorgebucaran/fisher?tab=readme-ov-file): fish插件管理工具&#13;
+&gt; fish 语法不兼容 bash，好多文档给的命令都是 bash，粘进 fish 发现不兼容就很难受，zsh 语法兼容 bash，启动速度没感觉多慢，ohmyzsh 安装也挺快的&#13;
+&#13;
+4. [kitty](https://sw.kovidgoyal.net/kitty/)&#13;
+The fast, feature-rich, GPU based terminal emulator&#13;
+&gt; kitty 有一点 印度的味道，其实做得很不错了，但是有一个点，窗口的初始启动位置居然不是居中的，而且不能配置，此外启动速度的强迫症，导致我放弃了他&#13;
+&#13;
+5. [ohmyz](https://ohmyz.sh/)&#13;
+&#13;
+6. [zsh](https://zsh.sourceforge.io/)&#13;
+&#13;
+zsh插件管理工具：&#13;
+- [zinit](https://github.com/zdharma-continuum/zinit)&#13;
+- [zi](https://github.com/z-shell/zi)&#13;
+&#13;
+7. [warp](https://www.warp.dev/) AI智能终端。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/hao-yong-de-zhong-duan.html</guid><pubDate>Mon, 25 Nov 2024 02:40:19 +0000</pubDate></item><item><title>群晖安装ipkg管理工具</title><link>https://chajiuqqq.github.io//post/qun-hui-an-zhuang-ipkg-guan-li-gong-ju.html</link><description>&gt; https://www.landiannews.com/archives/92174.html&#13;
 &#13;
 安装ipkg&#13;
 ```bash&#13;
