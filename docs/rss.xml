@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Mon, 25 Nov 2024 02:49:30 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>linux排查空间占用过大</title><link>https://chajiuqqq.github.io//post/linux-pai-cha-kong-jian-zhan-yong-guo-da.html</link><description>首先`df -h`看到/下占用基本满了，但不知道大文件在哪&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Mon, 25 Nov 2024 03:09:12 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>linux排查空间占用过大</title><link>https://chajiuqqq.github.io//post/linux-pai-cha-kong-jian-zhan-yong-guo-da.html</link><description>首先`df -h`看到/下占用基本满了，但不知道大文件在哪&#13;
 &#13;
 ```bash&#13;
 root@caijiachen:~# df -h&#13;
@@ -65,7 +65,8 @@ zsh插件管理工具：&#13;
 - [zinit](https://github.com/zdharma-continuum/zinit)&#13;
 - [zi](https://github.com/z-shell/zi)&#13;
 &#13;
-7. [warp](https://www.warp.dev/) AI智能终端。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/hao-yong-de-zhong-duan.html</guid><pubDate>Mon, 25 Nov 2024 02:40:19 +0000</pubDate></item><item><title>群晖安装ipkg管理工具</title><link>https://chajiuqqq.github.io//post/qun-hui-an-zhuang-ipkg-guan-li-gong-ju.html</link><description>&gt; https://www.landiannews.com/archives/92174.html&#13;
+7. [warp](https://www.warp.dev/) AI智能终端&#13;
+8. [Zellij](https://github.com/zellij-org/zellij) for Linux/MacOS。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/hao-yong-de-zhong-duan.html</guid><pubDate>Mon, 25 Nov 2024 02:40:19 +0000</pubDate></item><item><title>群晖安装ipkg管理工具</title><link>https://chajiuqqq.github.io//post/qun-hui-an-zhuang-ipkg-guan-li-gong-ju.html</link><description>&gt; https://www.landiannews.com/archives/92174.html&#13;
 &#13;
 安装ipkg&#13;
 ```bash&#13;
