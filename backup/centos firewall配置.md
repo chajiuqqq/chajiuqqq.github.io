@@ -41,3 +41,5 @@
    ```
 
 这样，端口就已经放行了。如果需要放行其他端口，只需替换 `8080` 为你需要的端口号。
+
+> [How to Check firewalld Status on CentOS and Rocky Linux]( https://phoenixnap.com/kb/how-to-enable-and-use-firewalld-centos)
