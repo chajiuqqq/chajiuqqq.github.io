@@ -1,5 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Fri, 06 Dec 2024 09:39:24 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>centos7的yum更新源</title><link>https://chajiuqqq.github.io//post/centos7-de-yum-geng-xin-yuan.html</link><description>官方可能不支持centos7了，太老了，所以用阿里云的源&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Fri, 06 Dec 2024 10:03:14 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>centos firewall配置</title><link>https://chajiuqqq.github.io//post/centos%20firewall-pei-zhi.html</link><description>查看防火墙状态 `sudo systemctl status firewalld`&#13;
+## firewall-cmd怎么放行端口&#13;
+&#13;
+使用 `firewall-cmd` 放行端口的步骤如下：&#13;
+&#13;
+1. **查看当前防火墙规则：**&#13;
+&#13;
+   首先，查看当前防火墙的开放端口：&#13;
+&#13;
+   ```bash&#13;
+   firewall-cmd --list-all&#13;
+   ```&#13;
+&#13;
+2. **放行端口：**&#13;
+&#13;
+   以放行端口 8080 为例，可以使用以下命令：&#13;
+&#13;
+   ```bash&#13;
+   sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent&#13;
+   ```&#13;
+&#13;
+   说明：&#13;
+   - `--zone=public`：表示在公共区域进行设置，可以根据实际需要选择其他区域。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/centos%20firewall-pei-zhi.html</guid><pubDate>Fri, 06 Dec 2024 10:02:50 +0000</pubDate></item><item><title>centos7的yum更新源</title><link>https://chajiuqqq.github.io//post/centos7-de-yum-geng-xin-yuan.html</link><description>官方可能不支持centos7了，太老了，所以用阿里云的源&#13;
 ## 下载源&#13;
 1、安装wget&#13;
 yum install -y wget&#13;
