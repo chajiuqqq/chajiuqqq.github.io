@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Thu, 05 Dec 2024 02:29:18 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>vscode快捷键妙用（windsurf）</title><link>https://chajiuqqq.github.io//post/vscode-kuai-jie-jian-miao-yong-%EF%BC%88windsurf%EF%BC%89.html</link><description># 修改方法名后，如何自动修改引用的地方&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Fri, 06 Dec 2024 09:39:24 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>centos7的yum更新源</title><link>https://chajiuqqq.github.io//post/centos7-de-yum-geng-xin-yuan.html</link><description>官方可能不支持centos7了，太老了，所以用阿里云的源&#13;
+## 下载源&#13;
+1、安装wget&#13;
+yum install -y wget&#13;
+&#13;
+2、下载CentOS 7的repo文件&#13;
+`wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo`&#13;
+或者&#13;
+`curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo`&#13;
+&#13;
+3、更新镜像源&#13;
+清除缓存：`yum clean all`&#13;
+生成缓存：`yum update`&#13;
+&#13;
+&gt; https://developer.aliyun.com/article/704987 http改为https？有啥用。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/centos7-de-yum-geng-xin-yuan.html</guid><pubDate>Fri, 06 Dec 2024 09:39:00 +0000</pubDate></item><item><title>vscode快捷键妙用（windsurf）</title><link>https://chajiuqqq.github.io//post/vscode-kuai-jie-jian-miao-yong-%EF%BC%88windsurf%EF%BC%89.html</link><description># 修改方法名后，如何自动修改引用的地方&#13;
 &#13;
 方法一：使用 VS Code 的重命名功能&#13;
 这是最直接且推荐的方法。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/vscode-kuai-jie-jian-miao-yong-%EF%BC%88windsurf%EF%BC%89.html</guid><pubDate>Thu, 05 Dec 2024 02:28:54 +0000</pubDate></item><item><title>piclmpact+alist组成摄影照片gallery❤️</title><link>https://chajiuqqq.github.io//post/piclmpact%2Balist-zu-cheng-she-ying-zhao-pian-gallery%E2%9D%A4%EF%B8%8F.html</link><description>&#13;
