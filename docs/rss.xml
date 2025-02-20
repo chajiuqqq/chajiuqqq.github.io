@@ -1,5 +1,52 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Tue, 14 Jan 2025 03:42:21 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>facad：多彩的命令行目录工具</title><link>https://chajiuqqq.github.io//post/facad%EF%BC%9A-duo-cai-de-ming-ling-xing-mu-lu-gong-ju.html</link><description>https://github.com/yellow-footed-honeyguide/facad&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Thu, 20 Feb 2025 09:53:35 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>k8s的Deployment和Service有什么区别</title><link>https://chajiuqqq.github.io//post/k8s-de-Deployment-he-Service-you-shen-me-qu-bie.html</link><description>&gt; From qwen2.5-max
+
+# 用通俗的语言解释k8s的Deployment和Service 有什么区别
+
+好的！用通俗的语言来解释 Kubernetes 的 **Deployment** 和 **Service**，可以这样理解：
+
+---
+
+### **1. Deployment 是“工人管理器”**
+- **Deployment** 就像是一个负责管理工人的老板。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/k8s-de-Deployment-he-Service-you-shen-me-qu-bie.html</guid><pubDate>Thu, 20 Feb 2025 08:21:48 +0000</pubDate></item><item><title>我想做一些自我提升的事情，比如学钢琴、准备跳槽，但是没法形成一种执行体系，总是拖延，该如何提高执行力？</title><link>https://chajiuqqq.github.io//post/wo-xiang-zuo-yi-xie-zi-wo-ti-sheng-de-shi-qing-%EF%BC%8C-bi-ru-xue-gang-qin-%E3%80%81-zhun-bei-tiao-cao-%EF%BC%8C-dan-shi-mei-fa-xing-cheng-yi-zhong-zhi-xing-ti-xi-%EF%BC%8C-zong-shi-tuo-yan-%EF%BC%8C-gai-ru-he-ti-gao-zhi-xing-li-%EF%BC%9F.html</link><description>```
+&lt;zhithink&gt;
+嗯，用户现在遇到了执行力的问题，想自我提升但总是拖延，比如学钢琴和准备跳槽。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/wo-xiang-zuo-yi-xie-zi-wo-ti-sheng-de-shi-qing-%EF%BC%8C-bi-ru-xue-gang-qin-%E3%80%81-zhun-bei-tiao-cao-%EF%BC%8C-dan-shi-mei-fa-xing-cheng-yi-zhong-zhi-xing-ti-xi-%EF%BC%8C-zong-shi-tuo-yan-%EF%BC%8C-gai-ru-he-ti-gao-zhi-xing-li-%EF%BC%9F.html</guid><pubDate>Tue, 18 Feb 2025 03:08:18 +0000</pubDate></item><item><title>我们需要接纳自己的不足，但同时又要对抗人性的缺陷比如贪婪、懒惰，如何理解这句话？如何做好其中的平衡？</title><link>https://chajiuqqq.github.io//post/wo-men-xu-yao-jie-na-zi-ji-de-bu-zu-%EF%BC%8C-dan-tong-shi-you-yao-dui-kang-ren-xing-de-que-xian-bi-ru-tan-lan-%E3%80%81-lan-duo-%EF%BC%8C-ru-he-li-jie-zhe-ju-hua-%EF%BC%9F-ru-he-zuo-hao-qi-zhong-de-ping-heng-%EF%BC%9F.html</link><description>要理解'接纳不足'与'对抗缺陷'的平衡关系，需要先明确三个关键区分：
+
+1. **不足与缺陷的界限**：先天特质（如身高）或中性特点（如内向）属于可接纳范围，而违背社会规则（如贪婪）、影响基本生存（如拖延症）则属于需要修正的缺陷。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/wo-men-xu-yao-jie-na-zi-ji-de-bu-zu-%EF%BC%8C-dan-tong-shi-you-yao-dui-kang-ren-xing-de-que-xian-bi-ru-tan-lan-%E3%80%81-lan-duo-%EF%BC%8C-ru-he-li-jie-zhe-ju-hua-%EF%BC%9F-ru-he-zuo-hao-qi-zhong-de-ping-heng-%EF%BC%9F.html</guid><pubDate>Tue, 18 Feb 2025 02:52:48 +0000</pubDate></item><item><title>linux设置代理的几种方式</title><link>https://chajiuqqq.github.io//post/linux-she-zhi-dai-li-de-ji-zhong-fang-shi.html</link><description>&gt; https://unix.stackexchange.com/a/213740
+## [√]使用http_proxy环境变量
+修改`~/.bashrc`或者` /etc/profile`:
+```bash
+http_proxy=http://user:password@proxyserver.com:3128
+https_proxy=https://user:password@proxyserver.com:3128
+export http_proxy
+export https_proxy
+```
+
+**http_proxy和https_proxy变量有什么区别？curl命令会如何设置代理？`https_proxy=http://ip:port`这样设置允许吗？**
+
+目标地址使用https时，会使用https_proxy设置代理，但是和代理服务器的通讯方式不一定是https
+```bash
+export https_proxy=http://192.168.1.1:8080
+curl https://example.com
+```
+这里，curl 通过 HTTP 协议与代理服务器 192.168.1.1:8080 通信，然后代理服务器与 https://example.com 建立 HTTPS 连接。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/linux-she-zhi-dai-li-de-ji-zhong-fang-shi.html</guid><pubDate>Thu, 06 Feb 2025 07:24:06 +0000</pubDate></item><item><title>tailscale 如何允许访问一个节点的内网设备？</title><link>https://chajiuqqq.github.io//post/tailscale%20-ru-he-yun-xu-fang-wen-yi-ge-jie-dian-de-nei-wang-she-bei-%EF%BC%9F.html</link><description>&gt; deepseek
+
+要允许通过 Tailscale 访问某个节点的内网设备，可以按照以下步骤进行配置：
+
+1. **启用子网路由**：
+   - 在目标节点上，运行以下命令以启用子网路由：
+     ```bash
+     sudo tailscale up --advertise-routes=&lt;内网子网&gt;
+     ```
+     例如，如果你的内网子网是 `192.168.1.0/24`，则命令如下（这里可以写多个子网，在控制台中配置启用哪个子网）：
+     ```bash
+     sudo tailscale up --advertise-routes=192.168.1.0/24
+     ```
+ 
+
+
+2. **在 Tailscale 管理面板中批准子网路由**：
+   - 登录 Tailscale 管理面板（https://login.tailscale.com/admin/machines）。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/tailscale%20-ru-he-yun-xu-fang-wen-yi-ge-jie-dian-de-nei-wang-she-bei-%EF%BC%9F.html</guid><pubDate>Wed, 05 Feb 2025 06:10:00 +0000</pubDate></item><item><title>facad：多彩的命令行目录工具</title><link>https://chajiuqqq.github.io//post/facad%EF%BC%9A-duo-cai-de-ming-ling-xing-mu-lu-gong-ju.html</link><description>https://github.com/yellow-footed-honeyguide/facad&#13;
 &#13;
 **依赖：**&#13;
 - python3&#13;
@@ -204,26 +251,30 @@ Ctrl-A：回到行首 &#13;
 Ctrl-E：回到行尾&#13;
 Ctrl-U：清除光标前的命令&#13;
 &#13;
-https://twobithistory.org/2019/08/22/readline.html。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/GNU%20Readline-ku-de-miao-yong.html</guid><pubDate>Thu, 10 Oct 2024 07:54:09 +0000</pubDate></item><item><title>Git妙用</title><link>https://chajiuqqq.github.io//post/Git-miao-yong.html</link><description># 用例&#13;
-- **查看commit提交的细节，会展示文件变化细节**：`git show &lt;commit&gt;` OR `git log -p`&#13;
-- **查看commit中提交的文件名称**：`git show --name-status &lt;commit&gt;`&#13;
-&#13;
-```&#13;
-$  git show --name-status 1e7cf253a6e6e&#13;
-commit 1e7cf253a6e6ecee6376b12d9fcabf2ec3f7f9e6 (EH-1699)&#13;
-Author: caijiachen &lt;chajiuqqq@gmail.com&gt;&#13;
-Date:   Sat Sep 7 15:57:21 2024 +0200&#13;
-&#13;
-    EH-1699: add other stock business interface to proto&#13;
-&#13;
-M       oms/pkg/proto/oms_order_v3.pb.go&#13;
-M       oms/pkg/proto/oms_order_v3.proto&#13;
-M       rfcctl/types/mm.go&#13;
-M       webproto&#13;
-```&#13;
-&#13;
-- git merge出现冲突时，不想处理冲突，取消合并：`git merge --abort`&#13;
-- 如果已经merge了，要回退，用`git reset `或 `git revert`&#13;
+https://twobithistory.org/2019/08/22/readline.html。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/GNU%20Readline-ku-de-miao-yong.html</guid><pubDate>Thu, 10 Oct 2024 07:54:09 +0000</pubDate></item><item><title>Git妙用</title><link>https://chajiuqqq.github.io//post/Git-miao-yong.html</link><description># 用例
+- **查看commit提交的细节，会展示文件变化细节**：`git show &lt;commit&gt;` OR `git log -p`
+- **查看commit中提交的文件名称**：`git show --name-status &lt;commit&gt;`
+```
+$  git show --name-status 1e7cf253a6e6e
+commit 1e7cf253a6e6ecee6376b12d9fcabf2ec3f7f9e6 (EH-1699)
+Author: caijiachen &lt;chajiuqqq@gmail.com&gt;
+Date:   Sat Sep 7 15:57:21 2024 +0200
+
+    EH-1699: add other stock business interface to proto
+
+M       oms/pkg/proto/oms_order_v3.pb.go
+M       oms/pkg/proto/oms_order_v3.proto
+M       rfcctl/types/mm.go
+M       webproto
+```
+- **git如何强制使用远程dev分支覆盖本地dev分支**: 
+```
+git fetch origin  
+git reset --hard origin/dev
+```
+
+- git merge出现冲突时，不想处理冲突，取消合并：`git merge --abort`
+- 如果已经merge了，要回退，用`git reset `或 `git revert`
 - **误add了不想commit的文件到暂存区，怎么删除？** `git restore --staged &lt;文件&gt; `：将暂存区中的文件替换为仓库中某个提交的版本（默认为 HEAD）。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/Git-miao-yong.html</guid><pubDate>Sat, 07 Sep 2024 14:27:01 +0000</pubDate></item><item><title>mysql的json处理方法合集</title><link>https://chajiuqqq.github.io//post/mysql-de-json-chu-li-fang-fa-he-ji.html</link><description>## 更新json中的某个属性&#13;
 &#13;
 写一个mysql的sql，property列存储了json，格式是&#13;

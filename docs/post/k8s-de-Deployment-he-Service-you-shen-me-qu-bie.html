@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="http://meekdai.com/favicon.ico"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="> From qwen2.5-max
+
+# 用通俗的语言解释k8s的Deployment和Service 有什么区别
+
+好的！用通俗的语言来解释 Kubernetes 的 **Deployment** 和 **Service**，可以这样理解：
+
+---
+
+### **1. Deployment 是“工人管理器”**
+- **Deployment** 就像是一个负责管理工人的老板。">
+<meta property="og:title" content="k8s的Deployment和Service有什么区别">
+<meta property="og:description" content="> From qwen2.5-max
+
+# 用通俗的语言解释k8s的Deployment和Service 有什么区别
+
+好的！用通俗的语言来解释 Kubernetes 的 **Deployment** 和 **Service**，可以这样理解：
+
+---
+
+### **1. Deployment 是“工人管理器”**
+- **Deployment** 就像是一个负责管理工人的老板。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/k8s-de-Deployment-he-Service-you-shen-me-qu-bie.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
+<title>k8s的Deployment和Service有什么区别</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">k8s的Deployment和Service有什么区别</h1>
+<div class="title-right">
+    <a href="https://chajiuqqq.github.io/" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/chajiuqqq/chajiuqqq.github.io/issues/41" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><blockquote>
+<p>From qwen2.5-max</p>
+</blockquote>
+<h1>用通俗的语言解释k8s的Deployment和Service 有什么区别</h1>
+<p>好的！用通俗的语言来解释 Kubernetes 的 <strong>Deployment</strong> 和 <strong>Service</strong>，可以这样理解：</p>
+<hr>
+<h3><strong>1. Deployment 是“工人管理器”</strong></h3>
+<ul>
+<li><strong>Deployment</strong> 就像是一个负责管理工人的老板。
+<ul>
+<li>它会确保你指定的工人（Pod）数量始终在工作。</li>
+<li>如果某个工人突然生病了（Pod 崩溃），它会立刻找一个新的工人顶替。</li>
+<li>如果你想升级工人技能（更新应用版本），它会逐步替换旧工人，确保工作不会中断。</li>
+<li>它还支持动态调整工人数（扩容或缩容），比如从 3 个工人增加到 5 个工人。</li>
+</ul>
+</li>
+</ul>
+<p>总结：<strong>Deployment 管理的是“工人”（Pod），负责创建、更新、扩展和修复它们。</strong></p>
+<hr>
+<h3><strong>2. Service 是“接待窗口”</strong></h3>
+<ul>
+<li><strong>Service</strong> 就像是一个接待窗口，负责让客户（用户或其他服务）找到你的工人（Pod）。
+<ul>
+<li>工人可能经常换位置（Pod 的 IP 地址会变化），但接待窗口的位置是固定的。</li>
+<li>客户只需要记住接待窗口的名字，而不用关心具体哪个工人在干活。</li>
+<li>接待窗口还会根据客户需求，把任务分配给不同的工人（负载均衡）。</li>
+</ul>
+</li>
+</ul>
+<p>总结：<strong>Service 提供了一个稳定的“门面”，让外界能方便地访问你的工人（Pod）。</strong></p>
+<hr>
+<h3><strong>3. 它们的关系</strong></h3>
+<ul>
+<li><strong>Deployment</strong> 负责“生产”工人，并确保他们正常工作。</li>
+<li><strong>Service</strong> 负责“接待”客户，并把客户的请求分发给合适的工人。</li>
+</ul>
+<p>举个生活中的例子：</p>
+<ul>
+<li>假设你开了一家餐厅：
+<ul>
+<li><strong>Deployment</strong> 就是餐厅经理，负责招聘厨师（Pod），并确保厨房里始终有足够的人手。</li>
+<li><strong>Service</strong> 就是餐厅前台，负责接待顾客，并把订单分配给空闲的厨师。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3><strong>4. 区别总结</strong></h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>Deployment（工人管理器）</strong></th>
+<th><strong>Service（接待窗口）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>职责</strong></td>
+<td>管理工人（Pod），确保他们正常工作。</td>
+<td>提供稳定的入口，让客户能找到工人。</td>
+</tr>
+<tr>
+<td><strong>是否直接干活</strong></td>
+<td>不直接干活，但负责安排工人干活。</td>
+<td>不直接干活，但负责分配任务给工人。</td>
+</tr>
+<tr>
+<td><strong>是否稳定</strong></td>
+<td>工人可能会换（IP 变化），不稳定。</td>
+<td>接待窗口的位置固定，非常稳定。</td>
+</tr>
+<tr>
+<td><strong>功能重点</strong></td>
+<td>创建、更新、扩展、修复工人。</td>
+<td>提供访问入口、负载均衡、服务发现。</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h3><strong>5. 再举个实际的例子</strong></h3>
+<p>假设你在开发一个电商网站：</p>
+<ul>
+<li><strong>Deployment</strong>：
+<ul>
+<li>负责运行你的后端服务（比如订单处理系统），确保有 3 个实例在运行。</li>
+<li>如果某个实例崩溃了，它会立刻启动一个新的实例。</li>
+</ul>
+</li>
+<li><strong>Service</strong>：
+<ul>
+<li>给你的后端服务提供一个固定的地址（比如 <code class="notranslate">order-service</code>），让前端页面可以通过这个地址访问后端。</li>
+<li>即使后端的实例换了 IP 地址，前端也不需要修改代码，因为 Service 的地址是不变的。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3><strong>6. 总结一句话</strong></h3>
+<ul>
+<li><strong>Deployment 是管工人的，Service 是管客户的。</strong></li>
+<li>它们一起合作，才能让你的应用既稳定又高效地运行起来！</li>
+</ul>
+<hr>
+<h1>专业的解释</h1>
+<p>在 Kubernetes 中，<code class="notranslate">Deployment</code> 和 <code class="notranslate">Service</code> 是两个核心概念，它们的作用和职责完全不同，但通常一起使用来部署和管理应用程序。以下是它们的区别和各自的功能详解：</p>
+<hr>
+<h3><strong>1. Deployment 的作用</strong></h3>
+<p><code class="notranslate">Deployment</code> 是 Kubernetes 中用于定义和管理应用程序的<strong>工作负载资源</strong>（Workload Resource）。它的主要职责是确保指定数量的 Pod 副本始终处于运行状态，并支持滚动更新、回滚等操作。</p>
+<h4><strong>功能特点：</strong></h4>
+<ul>
+<li><strong>Pod 管理</strong>：
+<ul>
+<li>定义 Pod 的模板（<code class="notranslate">PodTemplateSpec</code>），包括容器镜像、环境变量、资源限制等。</li>
+<li>确保指定数量的 Pod 副本（<code class="notranslate">replicas</code>）始终运行。</li>
+</ul>
+</li>
+<li><strong>滚动更新与回滚</strong>：
+<ul>
+<li>支持无缝升级应用版本（例如更新镜像版本）。</li>
+<li>如果新版本有问题，可以快速回滚到之前的版本。</li>
+</ul>
+</li>
+<li><strong>自愈能力</strong>：
+<ul>
+<li>如果某个 Pod 崩溃或被删除，Deployment 会自动创建新的 Pod 来替换它。</li>
+</ul>
+</li>
+<li><strong>扩展性</strong>：
+<ul>
+<li>可以动态调整副本数（<code class="notranslate">kubectl scale</code>）以适应流量变化。</li>
+</ul>
+</li>
+</ul>
+<h4><strong>示例：</strong></h4>
+<div class="highlight highlight-source-yaml"><pre class="notranslate"><span class="pl-ent">apiVersion</span>: <span class="pl-s">apps/v1</span>
+<span class="pl-ent">kind</span>: <span class="pl-s">Deployment</span>
+<span class="pl-ent">metadata</span>:
+  <span class="pl-ent">name</span>: <span class="pl-s">my-app</span>
+<span class="pl-ent">spec</span>:
+  <span class="pl-ent">replicas</span>: <span class="pl-c1">3</span>
+  <span class="pl-ent">selector</span>:
+    <span class="pl-ent">matchLabels</span>:
+      <span class="pl-ent">app</span>: <span class="pl-s">my-app</span>
+  <span class="pl-ent">template</span>:
+    <span class="pl-ent">metadata</span>:
+      <span class="pl-ent">labels</span>:
+        <span class="pl-ent">app</span>: <span class="pl-s">my-app</span>
+    <span class="pl-ent">spec</span>:
+      <span class="pl-ent">containers</span>:
+        - <span class="pl-ent">name</span>: <span class="pl-s">my-app-container</span>
+          <span class="pl-ent">image</span>: <span class="pl-s">my-app-image:latest</span>
+          <span class="pl-ent">ports</span>:
+            - <span class="pl-ent">containerPort</span>: <span class="pl-c1">8080</span></pre></div>
+<hr>
+<h3><strong>2. Service 的作用</strong></h3>
+<p><code class="notranslate">Service</code> 是 Kubernetes 中用于定义网络服务的资源对象。它的主要职责是为一组 Pod 提供稳定的网络访问入口，屏蔽底层 Pod 的动态变化（如 IP 地址的变化）。</p>
+<h4><strong>功能特点：</strong></h4>
+<ul>
+<li><strong>负载均衡</strong>：
+<ul>
+<li>将流量分发到后端的多个 Pod 实例。</li>
+</ul>
+</li>
+<li><strong>稳定访问入口</strong>：
+<ul>
+<li>即使后端 Pod 的 IP 发生变化（例如扩容、缩容、重启等），Service 的 IP 和 DNS 名称始终保持不变。</li>
+</ul>
+</li>
+<li><strong>服务发现</strong>：
+<ul>
+<li>其他服务可以通过 Service 的名称（DNS 名称）访问该服务。</li>
+</ul>
+</li>
+<li><strong>多种类型</strong>：
+<ul>
+<li><code class="notranslate">ClusterIP</code>：仅在集群内部访问（默认类型）。</li>
+<li><code class="notranslate">NodePort</code>：通过节点的特定端口暴露服务。</li>
+<li><code class="notranslate">LoadBalancer</code>：通过云提供商的负载均衡器暴露服务。</li>
+<li><code class="notranslate">ExternalName</code>：将服务映射到外部域名。</li>
+</ul>
+</li>
+</ul>
+<h4><strong>示例：</strong></h4>
+<div class="highlight highlight-source-yaml"><pre class="notranslate"><span class="pl-ent">apiVersion</span>: <span class="pl-c1">v1</span>
+<span class="pl-ent">kind</span>: <span class="pl-s">Service</span>
+<span class="pl-ent">metadata</span>:
+  <span class="pl-ent">name</span>: <span class="pl-s">my-app-service</span>
+<span class="pl-ent">spec</span>:
+  <span class="pl-ent">selector</span>:
+    <span class="pl-ent">app</span>: <span class="pl-s">my-app</span>
+  <span class="pl-ent">ports</span>:
+    - <span class="pl-ent">protocol</span>: <span class="pl-s">TCP</span>
+      <span class="pl-ent">port</span>: <span class="pl-c1">80</span>
+      <span class="pl-ent">targetPort</span>: <span class="pl-c1">8080</span>
+  <span class="pl-ent">type</span>: <span class="pl-s">LoadBalancer</span></pre></div>
+<hr>
+<h3><strong>3. 区别对比</strong></h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>Deployment</strong></th>
+<th><strong>Service</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>核心职责</strong></td>
+<td>管理 Pod 的生命周期（创建、更新、扩展、自愈等）。</td>
+<td>提供稳定的网络访问入口，屏蔽 Pod 的动态变化。</td>
+</tr>
+<tr>
+<td><strong>是否直接管理 Pod</strong></td>
+<td>是</td>
+<td>否（通过标签选择器关联 Pod）。</td>
+</tr>
+<tr>
+<td><strong>是否提供网络功能</strong></td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>定义和管理应用程序的工作负载。</td>
+<td>为应用程序提供稳定的网络访问和服务发现功能。</td>
+</tr>
+<tr>
+<td><strong>是否支持负载均衡</strong></td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>是否支持滚动更新</strong></td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td><strong>是否支持多种类型</strong></td>
+<td>否</td>
+<td>是（ClusterIP、NodePort、LoadBalancer 等）。</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h3><strong>4. 如何协作？</strong></h3>
+<p><code class="notranslate">Deployment</code> 和 <code class="notranslate">Service</code> 通常一起使用，形成一个完整的应用部署方案：</p>
+<ol>
+<li><strong>Deployment</strong> 负责管理 Pod 的生命周期，确保应用的高可用性和可扩展性。</li>
+<li><strong>Service</strong> 负责为这些 Pod 提供稳定的网络访问入口，并实现负载均衡。</li>
+</ol>
+<h4><strong>协作流程：</strong></h4>
+<ul>
+<li><code class="notranslate">Deployment</code> 创建并管理一组 Pod（例如 3 个副本）。</li>
+<li><code class="notranslate">Service</code> 通过标签选择器（<code class="notranslate">selector</code>）找到这些 Pod，并为它们分配一个稳定的 IP 和 DNS 名称。</li>
+<li>外部客户端或其他服务通过 <code class="notranslate">Service</code> 访问应用，而无需关心后端 Pod 的具体细节。</li>
+</ul>
+<h4><strong>示例协作：</strong></h4>
+<div class="highlight highlight-source-yaml"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> Deployment</span>
+<span class="pl-ent">apiVersion</span>: <span class="pl-s">apps/v1</span>
+<span class="pl-ent">kind</span>: <span class="pl-s">Deployment</span>
+<span class="pl-ent">metadata</span>:
+  <span class="pl-ent">name</span>: <span class="pl-s">my-app</span>
+<span class="pl-ent">spec</span>:
+  <span class="pl-ent">replicas</span>: <span class="pl-c1">3</span>
+  <span class="pl-ent">selector</span>:
+    <span class="pl-ent">matchLabels</span>:
+      <span class="pl-ent">app</span>: <span class="pl-s">my-app</span>
+  <span class="pl-ent">template</span>:
+    <span class="pl-ent">metadata</span>:
+      <span class="pl-ent">labels</span>:
+        <span class="pl-ent">app</span>: <span class="pl-s">my-app</span>
+    <span class="pl-ent">spec</span>:
+      <span class="pl-ent">containers</span>:
+        - <span class="pl-ent">name</span>: <span class="pl-s">my-app-container</span>
+          <span class="pl-ent">image</span>: <span class="pl-s">my-app-image:latest</span>
+          <span class="pl-ent">ports</span>:
+            - <span class="pl-ent">containerPort</span>: <span class="pl-c1">8080</span>
+
+---
+<span class="pl-c"><span class="pl-c">#</span> Service</span>
+<span class="pl-ent">apiVersion</span>: <span class="pl-c1">v1</span>
+<span class="pl-ent">kind</span>: <span class="pl-s">Service</span>
+<span class="pl-ent">metadata</span>:
+  <span class="pl-ent">name</span>: <span class="pl-s">my-app-service</span>
+<span class="pl-ent">spec</span>:
+  <span class="pl-ent">selector</span>:
+    <span class="pl-ent">app</span>: <span class="pl-s">my-app</span>
+  <span class="pl-ent">ports</span>:
+    - <span class="pl-ent">protocol</span>: <span class="pl-s">TCP</span>
+      <span class="pl-ent">port</span>: <span class="pl-c1">80</span>
+      <span class="pl-ent">targetPort</span>: <span class="pl-c1">8080</span>
+  <span class="pl-ent">type</span>: <span class="pl-s">LoadBalancer</span></pre></div>
+<hr>
+<h3><strong>5. 总结</strong></h3>
+<ul>
+<li><strong>Deployment</strong> 是用来管理应用的工作负载资源，负责 Pod 的创建、更新、扩展和自愈。</li>
+<li><strong>Service</strong> 是用来提供网络功能的资源，负责为一组 Pod 提供稳定的访问入口和负载均衡。</li>
+<li>它们相辅相成：<code class="notranslate">Deployment</code> 确保应用的高可用性，<code class="notranslate">Service</code> 确保应用的可访问性。</li>
+</ul>
+<p>在实际使用中，通常需要同时定义 <code class="notranslate">Deployment</code> 和 <code class="notranslate">Service</code>，才能完整地部署和运行一个应用。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://chajiuqqq.github.io/">Chris.Cai Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek v2.22 https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","chajiuqqq/chajiuqqq.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+</script>
+<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>
+
+</html>

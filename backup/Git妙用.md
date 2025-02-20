@@ -1,7 +1,6 @@
 # 用例
 - **查看commit提交的细节，会展示文件变化细节**：`git show <commit>` OR `git log -p`
 - **查看commit中提交的文件名称**：`git show --name-status <commit>`
-
 ```
 $  git show --name-status 1e7cf253a6e6e
 commit 1e7cf253a6e6ecee6376b12d9fcabf2ec3f7f9e6 (EH-1699)
@@ -14,6 +13,11 @@ M       oms/pkg/proto/oms_order_v3.pb.go
 M       oms/pkg/proto/oms_order_v3.proto
 M       rfcctl/types/mm.go
 M       webproto
+```
+- **git如何强制使用远程dev分支覆盖本地dev分支**: 
+```
+git fetch origin  
+git reset --hard origin/dev
 ```
 
 - git merge出现冲突时，不想处理冲突，取消合并：`git merge --abort`

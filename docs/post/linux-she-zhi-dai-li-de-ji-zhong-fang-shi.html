@@ -10,27 +10,47 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="
-## 背景
-SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？
-- 如果转为byte截取，会导致结尾乱码可能
-- 无法按照字符个数截取，因为可能中英文数字混合输入
+<meta name="description" content="> https://unix.stackexchange.com/a/213740
+## [√]使用http_proxy环境变量
+修改`~/.bashrc`或者` /etc/profile`:
+```bash
+http_proxy=http://user:password@proxyserver.com:3128
+https_proxy=https://user:password@proxyserver.com:3128
+export http_proxy
+export https_proxy
+```
 
-## 解决方法
-利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。">
-<meta property="og:title" content="优雅截断utf8字符串">
-<meta property="og:description" content="
-## 背景
-SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？
-- 如果转为byte截取，会导致结尾乱码可能
-- 无法按照字符个数截取，因为可能中英文数字混合输入
+**http_proxy和https_proxy变量有什么区别？curl命令会如何设置代理？`https_proxy=http://ip:port`这样设置允许吗？**
 
-## 解决方法
-利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。">
+目标地址使用https时，会使用https_proxy设置代理，但是和代理服务器的通讯方式不一定是https
+```bash
+export https_proxy=http://192.168.1.1:8080
+curl https://example.com
+```
+这里，curl 通过 HTTP 协议与代理服务器 192.168.1.1:8080 通信，然后代理服务器与 https://example.com 建立 HTTPS 连接。">
+<meta property="og:title" content="linux设置代理的几种方式">
+<meta property="og:description" content="> https://unix.stackexchange.com/a/213740
+## [√]使用http_proxy环境变量
+修改`~/.bashrc`或者` /etc/profile`:
+```bash
+http_proxy=http://user:password@proxyserver.com:3128
+https_proxy=https://user:password@proxyserver.com:3128
+export http_proxy
+export https_proxy
+```
+
+**http_proxy和https_proxy变量有什么区别？curl命令会如何设置代理？`https_proxy=http://ip:port`这样设置允许吗？**
+
+目标地址使用https时，会使用https_proxy设置代理，但是和代理服务器的通讯方式不一定是https
+```bash
+export https_proxy=http://192.168.1.1:8080
+curl https://example.com
+```
+这里，curl 通过 HTTP 协议与代理服务器 192.168.1.1:8080 通信，然后代理服务器与 https://example.com 建立 HTTPS 连接。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://chajiuqqq.github.io//post/you-ya-jie-duan-utf8-zi-fu-chuan.html">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/linux-she-zhi-dai-li-de-ji-zhong-fang-shi.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
-<title>优雅截断utf8字符串</title>
+<title>linux设置代理的几种方式</title>
 <link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
@@ -62,7 +82,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">优雅截断utf8字符串</h1>
+<h1 class="postTitle">linux设置代理的几种方式</h1>
 <div class="title-right">
     <a href="https://chajiuqqq.github.io/" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -70,7 +90,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/chajiuqqq/chajiuqqq.github.io/issues/13" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/chajiuqqq/chajiuqqq.github.io/issues/38" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -86,48 +106,25 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h2>背景</h2>
-<p>SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？</p>
-<ul>
-<li>如果转为byte截取，会导致结尾乱码可能</li>
-<li>无法按照字符个数截取，因为可能中英文数字混合输入</li>
-</ul>
-<h2>解决方法</h2>
-<p>利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。这样就可以规范截取合法的index，避免乱码。</p>
-<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-k">func</span> <span class="pl-s1">truncComments</span>(<span class="pl-s1">in</span> <span class="pl-smi">string</span>) <span class="pl-smi">string</span> {
-	<span class="pl-c">// 按照长度25优雅截断utf8字符串</span>
-	<span class="pl-s1">result</span> <span class="pl-c1">:=</span> <span class="pl-s">""</span>
-	<span class="pl-s1">limit</span> <span class="pl-c1">:=</span> <span class="pl-c1">25</span>
-	<span class="pl-s1">right</span> <span class="pl-c1">:=</span> <span class="pl-c1">0</span>
-	<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">:=</span> <span class="pl-k">range</span> <span class="pl-s1">in</span> {
-		<span class="pl-k">if</span> <span class="pl-s1">i</span> <span class="pl-c1">&lt;=</span> <span class="pl-s1">limit</span> {
-			<span class="pl-s1">right</span> <span class="pl-c1">=</span> <span class="pl-s1">i</span>
-		} <span class="pl-k">else</span> {
-			<span class="pl-k">break</span>
-		}
-	}
-	<span class="pl-s1">result</span> <span class="pl-c1">=</span> <span class="pl-s1">in</span>[:<span class="pl-s1">right</span>]
-	<span class="pl-k">return</span> <span class="pl-s1">result</span>
-}</pre></div>
-<p>测试：</p>
-<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-k">func</span> <span class="pl-s1">TestTruncComments</span>(<span class="pl-s1">t</span> <span class="pl-c1">*</span>testing.<span class="pl-smi">T</span>) {
-	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-s">"123fff哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"</span>
-	<span class="pl-s1">o</span> <span class="pl-c1">:=</span> <span class="pl-s1">truncComments</span>(<span class="pl-s1">s</span>)
-	<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">o</span>)
-	<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">len</span>([]<span class="pl-smi">byte</span>(<span class="pl-s1">o</span>)))
-}
-
-<span class="pl-c1">==</span><span class="pl-c1">=</span> <span class="pl-s1">RUN</span>   <span class="pl-s1">TestTruncComments</span>
-<span class="pl-c1">123</span><span class="pl-s1">fff哈哈哈哈哈哈</span>
-<span class="pl-c1">24</span>
-<span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-c1">-</span> <span class="pl-s1">PASS</span>: <span class="pl-s1">TestTruncComments</span> (<span class="pl-c1">0.00</span><span class="pl-s1">s</span>)
-<span class="pl-s1">PASS</span>
-<span class="pl-s1">test</span> <span class="pl-s1">end</span></pre></div>
-<h2>reference</h2>
-<blockquote>
-<p><a href="https://stackoverflow.com/a/46416000" rel="nofollow">https://stackoverflow.com/a/46416000</a><br>
-Slicing strings treats them as their underlying byte array; the slice operator operates on indexes of bytes, not of runes (which can be multiple bytes each). However, range over a string iterates on runes - but the index returned is of bytes. This makes it fairly straightforward to do what you're looking for (<a href="https://play.golang.org/p/rfkfvbLWTM" rel="nofollow">full playground example here</a>)</p>
-</blockquote></div>
+<div class="markdown-body" id="postBody"><blockquote>
+<p><a href="https://unix.stackexchange.com/a/213740" rel="nofollow">https://unix.stackexchange.com/a/213740</a></p>
+</blockquote>
+<h2>[√]使用http_proxy环境变量</h2>
+<p>修改<code class="notranslate">~/.bashrc</code>或者<code class="notranslate"> /etc/profile</code>:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">http_proxy=http://user:password@proxyserver.com:3128
+https_proxy=https://user:password@proxyserver.com:3128
+<span class="pl-k">export</span> http_proxy
+<span class="pl-k">export</span> https_proxy</pre></div>
+<p><strong>http_proxy和https_proxy变量有什么区别？curl命令会如何设置代理？<code class="notranslate">https_proxy=http://ip:port</code>这样设置允许吗？</strong></p>
+<p>目标地址使用https时，会使用https_proxy设置代理，但是和代理服务器的通讯方式不一定是https</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">export</span> https_proxy=http://192.168.1.1:8080
+curl https://example.com</pre></div>
+<p>这里，curl 通过 HTTP 协议与代理服务器 192.168.1.1:8080 通信，然后代理服务器与 <a href="https://example.com" rel="nofollow">https://example.com</a> 建立 HTTPS 连接。</p>
+<p><em>nekobox等代理软件不支持https的入站请求，所以代理地址通常都设置为http协议：</em></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">http_proxy=http://192.168.30.233:2080
+https_proxy=http://192.168.30.233:2080</pre></div>
+<h2>[ ] proxy_chains方式</h2>
+<h2>[ ] 透明代理（transparent proxy）</h2></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

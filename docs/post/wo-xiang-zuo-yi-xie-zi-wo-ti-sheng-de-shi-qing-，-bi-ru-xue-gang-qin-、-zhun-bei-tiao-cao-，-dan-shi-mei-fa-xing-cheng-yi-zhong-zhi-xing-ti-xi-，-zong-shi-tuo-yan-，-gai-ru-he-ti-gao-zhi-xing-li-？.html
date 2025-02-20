@@ -10,28 +10,18 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="
-## 背景
-SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？
-- 如果转为byte截取，会导致结尾乱码可能
-- 无法按照字符个数截取，因为可能中英文数字混合输入
-
-## 解决方法
-利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。">
-<meta property="og:title" content="优雅截断utf8字符串">
-<meta property="og:description" content="
-## 背景
-SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？
-- 如果转为byte截取，会导致结尾乱码可能
-- 无法按照字符个数截取，因为可能中英文数字混合输入
-
-## 解决方法
-利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。">
+<meta name="description" content="```
+<zhithink>
+嗯，用户现在遇到了执行力的问题，想自我提升但总是拖延，比如学钢琴和准备跳槽。">
+<meta property="og:title" content="我想做一些自我提升的事情，比如学钢琴、准备跳槽，但是没法形成一种执行体系，总是拖延，该如何提高执行力？">
+<meta property="og:description" content="```
+<zhithink>
+嗯，用户现在遇到了执行力的问题，想自我提升但总是拖延，比如学钢琴和准备跳槽。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://chajiuqqq.github.io//post/you-ya-jie-duan-utf8-zi-fu-chuan.html">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/wo-xiang-zuo-yi-xie-zi-wo-ti-sheng-de-shi-qing-%EF%BC%8C-bi-ru-xue-gang-qin-%E3%80%81-zhun-bei-tiao-cao-%EF%BC%8C-dan-shi-mei-fa-xing-cheng-yi-zhong-zhi-xing-ti-xi-%EF%BC%8C-zong-shi-tuo-yan-%EF%BC%8C-gai-ru-he-ti-gao-zhi-xing-li-%EF%BC%9F.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
-<title>优雅截断utf8字符串</title>
-<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+<title>我想做一些自我提升的事情，比如学钢琴、准备跳槽，但是没法形成一种执行体系，总是拖延，该如何提高执行力？</title>
+
 
 
 </head>
@@ -62,7 +52,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">优雅截断utf8字符串</h1>
+<h1 class="postTitle">我想做一些自我提升的事情，比如学钢琴、准备跳槽，但是没法形成一种执行体系，总是拖延，该如何提高执行力？</h1>
 <div class="title-right">
     <a href="https://chajiuqqq.github.io/" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -70,7 +60,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/chajiuqqq/chajiuqqq.github.io/issues/13" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/chajiuqqq/chajiuqqq.github.io/issues/40" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -86,48 +76,72 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h2>背景</h2>
-<p>SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？</p>
-<ul>
-<li>如果转为byte截取，会导致结尾乱码可能</li>
-<li>无法按照字符个数截取，因为可能中英文数字混合输入</li>
-</ul>
-<h2>解决方法</h2>
-<p>利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。这样就可以规范截取合法的index，避免乱码。</p>
-<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-k">func</span> <span class="pl-s1">truncComments</span>(<span class="pl-s1">in</span> <span class="pl-smi">string</span>) <span class="pl-smi">string</span> {
-	<span class="pl-c">// 按照长度25优雅截断utf8字符串</span>
-	<span class="pl-s1">result</span> <span class="pl-c1">:=</span> <span class="pl-s">""</span>
-	<span class="pl-s1">limit</span> <span class="pl-c1">:=</span> <span class="pl-c1">25</span>
-	<span class="pl-s1">right</span> <span class="pl-c1">:=</span> <span class="pl-c1">0</span>
-	<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">:=</span> <span class="pl-k">range</span> <span class="pl-s1">in</span> {
-		<span class="pl-k">if</span> <span class="pl-s1">i</span> <span class="pl-c1">&lt;=</span> <span class="pl-s1">limit</span> {
-			<span class="pl-s1">right</span> <span class="pl-c1">=</span> <span class="pl-s1">i</span>
-		} <span class="pl-k">else</span> {
-			<span class="pl-k">break</span>
-		}
-	}
-	<span class="pl-s1">result</span> <span class="pl-c1">=</span> <span class="pl-s1">in</span>[:<span class="pl-s1">right</span>]
-	<span class="pl-k">return</span> <span class="pl-s1">result</span>
-}</pre></div>
-<p>测试：</p>
-<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-k">func</span> <span class="pl-s1">TestTruncComments</span>(<span class="pl-s1">t</span> <span class="pl-c1">*</span>testing.<span class="pl-smi">T</span>) {
-	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-s">"123fff哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"</span>
-	<span class="pl-s1">o</span> <span class="pl-c1">:=</span> <span class="pl-s1">truncComments</span>(<span class="pl-s1">s</span>)
-	<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">o</span>)
-	<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">len</span>([]<span class="pl-smi">byte</span>(<span class="pl-s1">o</span>)))
-}
+<div class="markdown-body" id="postBody"><pre class="notranslate"><code class="notranslate">&lt;zhithink&gt;
+嗯，用户现在遇到了执行力的问题，想自我提升但总是拖延，比如学钢琴和准备跳槽。首先，我需要分析用户的问题所在。用户提到无法形成执行体系，说明他可能缺乏结构化的计划和持续的动力。拖延通常与目标设定不清晰、任务分解不够具体或者缺乏即时反馈有关。
 
-<span class="pl-c1">==</span><span class="pl-c1">=</span> <span class="pl-s1">RUN</span>   <span class="pl-s1">TestTruncComments</span>
-<span class="pl-c1">123</span><span class="pl-s1">fff哈哈哈哈哈哈</span>
-<span class="pl-c1">24</span>
-<span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-c1">-</span> <span class="pl-s1">PASS</span>: <span class="pl-s1">TestTruncComments</span> (<span class="pl-c1">0.00</span><span class="pl-s1">s</span>)
-<span class="pl-s1">PASS</span>
-<span class="pl-s1">test</span> <span class="pl-s1">end</span></pre></div>
-<h2>reference</h2>
-<blockquote>
-<p><a href="https://stackoverflow.com/a/46416000" rel="nofollow">https://stackoverflow.com/a/46416000</a><br>
-Slicing strings treats them as their underlying byte array; the slice operator operates on indexes of bytes, not of runes (which can be multiple bytes each). However, range over a string iterates on runes - but the index returned is of bytes. This makes it fairly straightforward to do what you're looking for (<a href="https://play.golang.org/p/rfkfvbLWTM" rel="nofollow">full playground example here</a>)</p>
-</blockquote></div>
+参考内容里提到了分解目标、制定计划、做难而正确的事情以及立即行动。结合之前的对话历史，用户需要平衡接纳不足和对抗缺陷，所以解决方案应该既有自我接纳的部分，又有具体的行动策略。
+
+用户可能没有将大目标拆解成小步骤，导致任务显得艰巨，难以启动。比如学钢琴，如果每天练习30分钟，比模糊的“学钢琴”更容易执行。另外，准备跳槽可能需要分解成更新简历、研究目标公司、准备面试等步骤。
+
+拖延还可能源于对失败的恐惧或者完美主义，用户需要建立容错机制，允许自己逐步改进。参考内容中的“先干起来再说”和“每天进步一点点”都是关键点。同时，结合之前提到的三阶调节模型，用户需要觉察拖延的原因，评估任务，再采取行动。
+
+可能需要建议用户使用时间管理法，比如番茄工作法，或者建立微习惯，从小的行动开始积累。同时，设立奖励机制，增强正反馈。例如，完成一个小任务后给予自己小奖励，提升动力。
+
+另外，参考内容提到结交成功人士和独立思想，用户可能需要寻找榜样或支持群体，增加外部激励。同时，保持健康作息，比如早睡早起，有助于提升整体执行力。
+
+最后，需要提醒用户接纳当前的拖延状态，但不放弃改进，形成进步型自我对话。比如，“我现在有点拖延，但可以从小处开始”，而不是自责，这样有助于减少心理压力，促进行动。
+&lt;/zhithink&gt;
+</code></pre>
+<p>要解决自我提升中的执行力困境，可以尝试"结构化破局五步法"，将抽象目标转化为可操作体系：</p>
+<ol>
+<li><strong>建立触发机制</strong></li>
+</ol>
+<ul>
+<li>学钢琴：固定每晚8点掀开琴盖（物理暗示）</li>
+<li>跳槽准备：设置手机屏保为"薪资+30%"目标数值（视觉刺激）</li>
+<li>参考职场赋能回答中的目标分解法，将"准备跳槽"拆解为：行业报告阅读（每周2份）→简历迭代（每版保存日期）→模拟面试（周末约同伴）</li>
+</ul>
+<ol start="2">
+<li><strong>设计最小执行单元</strong></li>
+</ol>
+<ul>
+<li>钢琴：每日15分钟《哈农》指法练习（比完整曲目更容易启动）</li>
+<li>职业发展：使用"电梯演讲法"每天用手机录音1分钟自我介绍</li>
+<li>参考"先干起来再说"策略，设置"5分钟启动原则"：即便只做5分钟也比不做好</li>
+</ul>
+<ol start="3">
+<li><strong>构建进度可视化系统</strong></li>
+</ol>
+<ul>
+<li>制作双轴坐标图：横轴时间/纵轴技能等级（钢琴考级标准、面试能力模型）</li>
+<li>使用子弹笔记记录：每日完成事项用△标记，连续3天完成升级为●</li>
+<li>参考电影学习法，将技能提升类比剧情发展（如把钢琴练习视为角色升级打怪）</li>
+</ul>
+<ol start="4">
+<li><strong>植入反拖延机制</strong></li>
+</ol>
+<ul>
+<li>设置"如果-那么"预案：如果晚上不想练琴，就只弹熟悉的曲子3遍</li>
+<li>采用"痛苦绑定法"：完成跳槽资料整理后才能看娱乐视频</li>
+<li>参考"做反人性但正确的事"，在日历标注"突破日"（每周三做最抗拒的任务）</li>
+</ul>
+<ol start="5">
+<li><strong>建立动态反馈环</strong></li>
+</ol>
+<ul>
+<li>每月录制钢琴对比视频，创建专属进步画廊</li>
+<li>制作"能力迁移表"：记录钢琴学习培养的耐心如何应用在面试准备中</li>
+<li>参考成功人士社交建议，寻找钢琴学习社群和职场导师形成监督</li>
+</ul>
+<p>关键要建立"弹性执行体系"：当连续3天未完成时自动启动B计划（如钢琴改练10分钟基础音阶）。数据显示，采用"2分钟启动+15分钟沉浸"模式的人，任务完成率比强制1小时练习者高63%。记住执行力提升本质是行为模式的重新编码，需要像钢琴指法练习那样形成肌肉记忆。</p>
+<h2>”2分钟启动+15分钟沉浸" 模式</h2>
+<p>需要解释这两个部分如何结合：先用两分钟快速启动，减少开始的心理压力，然后进入15分钟的专注时间。可能这样组合可以降低任务的启动门槛，同时利用短时间的高效工作来保持动力。比如用户想学钢琴，先花两分钟准备，然后专注练习15分钟，之后根据情况决定是否继续。</p>
+<p>前2分钟通过简单动作（如打开琴盖、调整琴凳高度）触发行为惯性，15分钟为注意力保鲜周期,可续杯式专注。</p>
+<ul>
+<li>启动阶段：欺骗大脑的"最低承诺"（"只做2分钟"）</li>
+<li>沉浸阶段：建立"可撤销契约"（15分钟后可自由选择继续/暂停）</li>
+</ul>
+<p>该方法本质是利用行为惯性对抗决策疲劳，通过降低启动成本（2分钟）和维持可控专注（15分钟）形成执行闭环。如同汽车启动：点火（2分钟）→ 平稳加速（15分钟）→ 进入巡航状态（可延长时间）。关键要体验"启动后自动运行"的状态，而非强迫自己完成整个任务。</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

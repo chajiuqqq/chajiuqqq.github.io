@@ -10,28 +10,18 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="
-## 背景
-SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？
-- 如果转为byte截取，会导致结尾乱码可能
-- 无法按照字符个数截取，因为可能中英文数字混合输入
+<meta name="description" content="要理解'接纳不足'与'对抗缺陷'的平衡关系，需要先明确三个关键区分：
 
-## 解决方法
-利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。">
-<meta property="og:title" content="优雅截断utf8字符串">
-<meta property="og:description" content="
-## 背景
-SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？
-- 如果转为byte截取，会导致结尾乱码可能
-- 无法按照字符个数截取，因为可能中英文数字混合输入
+1. **不足与缺陷的界限**：先天特质（如身高）或中性特点（如内向）属于可接纳范围，而违背社会规则（如贪婪）、影响基本生存（如拖延症）则属于需要修正的缺陷。">
+<meta property="og:title" content="我们需要接纳自己的不足，但同时又要对抗人性的缺陷比如贪婪、懒惰，如何理解这句话？如何做好其中的平衡？">
+<meta property="og:description" content="要理解'接纳不足'与'对抗缺陷'的平衡关系，需要先明确三个关键区分：
 
-## 解决方法
-利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。">
+1. **不足与缺陷的界限**：先天特质（如身高）或中性特点（如内向）属于可接纳范围，而违背社会规则（如贪婪）、影响基本生存（如拖延症）则属于需要修正的缺陷。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://chajiuqqq.github.io//post/you-ya-jie-duan-utf8-zi-fu-chuan.html">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/wo-men-xu-yao-jie-na-zi-ji-de-bu-zu-%EF%BC%8C-dan-tong-shi-you-yao-dui-kang-ren-xing-de-que-xian-bi-ru-tan-lan-%E3%80%81-lan-duo-%EF%BC%8C-ru-he-li-jie-zhe-ju-hua-%EF%BC%9F-ru-he-zuo-hao-qi-zhong-de-ping-heng-%EF%BC%9F.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
-<title>优雅截断utf8字符串</title>
-<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+<title>我们需要接纳自己的不足，但同时又要对抗人性的缺陷比如贪婪、懒惰，如何理解这句话？如何做好其中的平衡？</title>
+
 
 
 </head>
@@ -62,7 +52,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">优雅截断utf8字符串</h1>
+<h1 class="postTitle">我们需要接纳自己的不足，但同时又要对抗人性的缺陷比如贪婪、懒惰，如何理解这句话？如何做好其中的平衡？</h1>
 <div class="title-right">
     <a href="https://chajiuqqq.github.io/" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -70,7 +60,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/chajiuqqq/chajiuqqq.github.io/issues/13" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/chajiuqqq/chajiuqqq.github.io/issues/39" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -86,48 +76,28 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h2>背景</h2>
-<p>SAP接口某CHAR字段要求长度不超过25字节，该字段可能输入中文，如何优雅截断字符串？</p>
+<div class="markdown-body" id="postBody"><p>要理解"接纳不足"与"对抗缺陷"的平衡关系，需要先明确三个关键区分：</p>
+<ol>
+<li>
+<p><strong>不足与缺陷的界限</strong>：先天特质（如身高）或中性特点（如内向）属于可接纳范围，而违背社会规则（如贪婪）、影响基本生存（如拖延症）则属于需要修正的缺陷。例如：敏感可以转化为同理心（接纳），但因此逃避社交则需调整（改变）</p>
+</li>
+<li>
+<p><strong>接纳的本质</strong>：不是消极认命，而是建立改变的起点。就像建筑师改造旧房，先要承认现有结构（接纳），才能设计加固方案（改变）。研究发现，自我接纳度高的人改变成功率提升37%</p>
+</li>
+<li>
+<p><strong>对抗的策略</strong>：针对不同弱点采取差异化处理</p>
 <ul>
-<li>如果转为byte截取，会导致结尾乱码可能</li>
-<li>无法按照字符个数截取，因为可能中英文数字混合输入</li>
+<li>生理性弱点（如嗜睡）：建立规律作息替代对抗</li>
+<li>心理性弱点（如嫉妒）：通过认知重构转化能量</li>
+<li>社会性弱点（如炫耀）：设置具体场景限制（如社交场合发言前数5秒）</li>
 </ul>
-<h2>解决方法</h2>
-<p>利用for range字符串时，每次获取一个rune（中英文或者数字），此时index是byte的index。这样就可以规范截取合法的index，避免乱码。</p>
-<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-k">func</span> <span class="pl-s1">truncComments</span>(<span class="pl-s1">in</span> <span class="pl-smi">string</span>) <span class="pl-smi">string</span> {
-	<span class="pl-c">// 按照长度25优雅截断utf8字符串</span>
-	<span class="pl-s1">result</span> <span class="pl-c1">:=</span> <span class="pl-s">""</span>
-	<span class="pl-s1">limit</span> <span class="pl-c1">:=</span> <span class="pl-c1">25</span>
-	<span class="pl-s1">right</span> <span class="pl-c1">:=</span> <span class="pl-c1">0</span>
-	<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">:=</span> <span class="pl-k">range</span> <span class="pl-s1">in</span> {
-		<span class="pl-k">if</span> <span class="pl-s1">i</span> <span class="pl-c1">&lt;=</span> <span class="pl-s1">limit</span> {
-			<span class="pl-s1">right</span> <span class="pl-c1">=</span> <span class="pl-s1">i</span>
-		} <span class="pl-k">else</span> {
-			<span class="pl-k">break</span>
-		}
-	}
-	<span class="pl-s1">result</span> <span class="pl-c1">=</span> <span class="pl-s1">in</span>[:<span class="pl-s1">right</span>]
-	<span class="pl-k">return</span> <span class="pl-s1">result</span>
-}</pre></div>
-<p>测试：</p>
-<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-k">func</span> <span class="pl-s1">TestTruncComments</span>(<span class="pl-s1">t</span> <span class="pl-c1">*</span>testing.<span class="pl-smi">T</span>) {
-	<span class="pl-s1">s</span> <span class="pl-c1">:=</span> <span class="pl-s">"123fff哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"</span>
-	<span class="pl-s1">o</span> <span class="pl-c1">:=</span> <span class="pl-s1">truncComments</span>(<span class="pl-s1">s</span>)
-	<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">o</span>)
-	<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">len</span>([]<span class="pl-smi">byte</span>(<span class="pl-s1">o</span>)))
-}
-
-<span class="pl-c1">==</span><span class="pl-c1">=</span> <span class="pl-s1">RUN</span>   <span class="pl-s1">TestTruncComments</span>
-<span class="pl-c1">123</span><span class="pl-s1">fff哈哈哈哈哈哈</span>
-<span class="pl-c1">24</span>
-<span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-c1">-</span> <span class="pl-s1">PASS</span>: <span class="pl-s1">TestTruncComments</span> (<span class="pl-c1">0.00</span><span class="pl-s1">s</span>)
-<span class="pl-s1">PASS</span>
-<span class="pl-s1">test</span> <span class="pl-s1">end</span></pre></div>
-<h2>reference</h2>
-<blockquote>
-<p><a href="https://stackoverflow.com/a/46416000" rel="nofollow">https://stackoverflow.com/a/46416000</a><br>
-Slicing strings treats them as their underlying byte array; the slice operator operates on indexes of bytes, not of runes (which can be multiple bytes each). However, range over a string iterates on runes - but the index returned is of bytes. This makes it fairly straightforward to do what you're looking for (<a href="https://play.golang.org/p/rfkfvbLWTM" rel="nofollow">full playground example here</a>)</p>
-</blockquote></div>
+</li>
+</ol>
+<p>具体平衡方法可参考"三阶调节模型"：<br>
+① 觉察阶段：用情绪日记记录弱点触发时的身体反应（如贪婪时手心出汗）<br>
+② 评估阶段：采用SWOT分析该特点（如懒惰带来休息充足/效率低下）<br>
+③ 行动阶段：设定不超过3项的改进清单，每项匹配具体场景（如对抗拖延可使用"2分钟启动法"）</p>
+<p>终极平衡点在于：接纳"存在弱点的自己"，但永不停止"优化弱点的进程"。就像园丁对待植物——接受现有形态（接纳），同时持续修剪培育（改变）。重点在于建立"进步型自我对话"："我现在有这个问题，但我正在培养解决它的能力"而非"我必须立刻消灭这个缺陷"</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

@@ -123,19 +123,19 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
     <div id="content">
 <div class="markdown-body" id="postBody"><p>2种方法：</p>
-<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-s1">num</span> <span class="pl-c1">:=</span> <span class="pl-en">int64</span>(<span class="pl-c1">127</span>)
+<div class="highlight highlight-source-go"><pre class="notranslate"><span class="pl-s1">num</span> <span class="pl-c1">:=</span> <span class="pl-s1">int64</span>(<span class="pl-c1">127</span>)
 
 <span class="pl-c">// 1</span>
-<span class="pl-s1">res</span> <span class="pl-c1">:=</span> <span class="pl-s1">strconv</span>.<span class="pl-en">FormatInt</span>(<span class="pl-s1">num</span>, <span class="pl-c1">2</span>)
-<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s1">res</span>)
+<span class="pl-s1">res</span> <span class="pl-c1">:=</span> <span class="pl-s1">strconv</span>.<span class="pl-c1">FormatInt</span>(<span class="pl-s1">num</span>, <span class="pl-c1">2</span>)
+<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">res</span>)
 
 <span class="pl-c">// 2</span>
-<span class="pl-s1">res</span> <span class="pl-c1">=</span> <span class="pl-s1">fmt</span>.<span class="pl-en">Sprintf</span>(<span class="pl-s">"%b"</span>, <span class="pl-s1">num</span>)
-<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s1">res</span>)
+<span class="pl-s1">res</span> <span class="pl-c1">=</span> <span class="pl-s1">fmt</span>.<span class="pl-c1">Sprintf</span>(<span class="pl-s">"%b"</span>, <span class="pl-s1">num</span>)
+<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">res</span>)
 
 <span class="pl-c">// 3</span>
-<span class="pl-s1">res</span> <span class="pl-c1">=</span> <span class="pl-s1">fmt</span>.<span class="pl-en">Sprintf</span>(<span class="pl-s">"%08b"</span>, <span class="pl-s1">num</span>)
-<span class="pl-s1">fmt</span>.<span class="pl-en">Println</span>(<span class="pl-s1">res</span>)</pre></div>
+<span class="pl-s1">res</span> <span class="pl-c1">=</span> <span class="pl-s1">fmt</span>.<span class="pl-c1">Sprintf</span>(<span class="pl-s">"%08b"</span>, <span class="pl-s1">num</span>)
+<span class="pl-s1">fmt</span>.<span class="pl-c1">Println</span>(<span class="pl-s1">res</span>)</pre></div>
 <pre class="notranslate"><code class="notranslate">1111111
 1111111
 01111111
