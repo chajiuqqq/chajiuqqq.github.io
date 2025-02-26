@@ -31,6 +31,14 @@
 
 这种协作方式就像工厂中的工人、资源分配员和总调度员一起工作，确保生产高效且有序。
 
+## [ 配置 systemd cgroup 驱动](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#containerd-systemd)
+结合 runc 使用 systemd cgroup 驱动，在 /etc/containerd/config.toml 中设置：
+```
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+  ...
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+    SystemdCgroup = true
+```
 
 ## 其他驱动
 

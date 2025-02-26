@@ -125,6 +125,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>systemd：可以接管 cgroup 的工作，统一管理资源和系统服务。</li>
 </ul>
 <p>这种协作方式就像工厂中的工人、资源分配员和总调度员一起工作，确保生产高效且有序。</p>
+<h2><a href="https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#containerd-systemd" rel="nofollow"> 配置 systemd cgroup 驱动</a></h2>
+<p>结合 runc 使用 systemd cgroup 驱动，在 /etc/containerd/config.toml 中设置：</p>
+<pre class="notranslate"><code class="notranslate">[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+  ...
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+    SystemdCgroup = true
+</code></pre>
 <h2>其他驱动</h2>
 <p><strong>运行时驱动</strong></p>
 <p>用于管理容器的运行时环境。常见的运行时驱动包括：</p>
