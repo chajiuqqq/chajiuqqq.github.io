@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="http://meekdai.com/favicon.ico"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="实现 CI/CD 环境下的 SSH 免密登录，主要涉及以下几个步骤：
+
+**1. 生成 SSH 密钥对 (在 CI/CD 系统或安全的环境中生成)**
+
+位置:  密钥对的生成应在安全的、可控的环境中进行，通常在 CI/CD 系统自身或者一个安全的管理机器上。">
+<meta property="og:title" content="cicd中实现ssh免密登录">
+<meta property="og:description" content="实现 CI/CD 环境下的 SSH 免密登录，主要涉及以下几个步骤：
+
+**1. 生成 SSH 密钥对 (在 CI/CD 系统或安全的环境中生成)**
+
+位置:  密钥对的生成应在安全的、可控的环境中进行，通常在 CI/CD 系统自身或者一个安全的管理机器上。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chajiuqqq.github.io//post/cicd-zhong-shi-xian-ssh-mian-mi-deng-lu.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/50012686?v=4">
+<title>cicd中实现ssh免密登录</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">cicd中实现ssh免密登录</h1>
+<div class="title-right">
+    <a href="https://chajiuqqq.github.io/" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/chajiuqqq/chajiuqqq.github.io/issues/47" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>实现 CI/CD 环境下的 SSH 免密登录，主要涉及以下几个步骤：</p>
+<p><strong>1. 生成 SSH 密钥对 (在 CI/CD 系统或安全的环境中生成)</strong></p>
+<p>位置:  密钥对的生成应在安全的、可控的环境中进行，通常在 CI/CD 系统自身或者一个安全的管理机器上。不要在开发人员的本地机器上生成用于生产环境的密钥，因为私钥的安全性至关重要。</p>
+<p>命令: 使用 ssh-keygen 命令生成密钥对。与普通 SSH 免密登录类似，但需要考虑密钥的存放和管理。</p>
+<pre class="notranslate"><code class="notranslate">ssh-keygen -t rsa -b 4096 -N "" -f ./id_rsa_deploy
+</code></pre>
+<p>-t rsa: 指定密钥类型为 RSA (也可以选择 ed25519，更安全高效)。<br>
+-b 4096: 指定密钥长度为 4096 位 (RSA 密钥推荐 4096 位或以上，提高安全性)。<br>
+-N "": 设置为空密码短语 (passphrase)。在 CI/CD 自动化场景中，通常不设置 passphrase，因为自动化脚本无法交互式输入 passphrase。但请权衡安全性，如果你的 CI/CD 系统可以安全地管理 passphrase，设置 passphrase 会更安全。 如果选择不使用 passphrase，务必更加小心地保护私钥。<br>
+-f ./id_rsa_deploy: 指定私钥文件名为 id_rsa_deploy，并保存在当前目录。你可以自定义文件名和路径。<br>
+执行该命令后，会生成两个文件：</p>
+<p>id_rsa_deploy (私钥): 极其重要，必须妥善保管，不要泄露。 这是 CI/CD 系统用来进行 SSH 认证的凭证。<br>
+id_rsa_deploy.pub (公钥): 需要部署到目标服务器。</p>
+<p><strong>2.  在 CI/CD 系统中安全存储私钥</strong></p>
+<p>不要硬编码在代码中:  绝对不要将私钥直接硬编码在 CI/CD 配置文件、脚本或者源代码仓库中。这是非常不安全的行为。</p>
+<p>使用 CI/CD 系统的 Secrets 管理功能:  绝大多数现代 CI/CD 系统 (例如 Jenkins, GitLab CI, GitHub Actions, Azure DevOps Pipelines, CircleCI 等) 都提供了安全的 Secrets 或 Credentials 管理功能。你应该使用这些功能来存储私钥。</p>
+<p>环境变量: 某些系统允许将 Secrets 设置为环境变量，在 CI/CD 任务运行时注入。但环境变量有时可能存在泄露风险 (例如日志输出)。<br>
+Secret Files: 更安全的方式是将私钥作为 Secret 文件上传到 CI/CD 系统，在任务运行时，CI/CD 系统会将私钥文件安全地挂载到任务运行环境中。<br>
+示例 (以 GitLab CI 为例):</p>
+<p>在 GitLab CI 中，你可以在 "Settings" -&gt; "CI/CD" -&gt; "Variables" 中添加一个类型为 "File" 的变量，变量名为 DEPLOY_PRIVATE_KEY，并将 id_rsa_deploy 私钥文件的内容粘贴到 "Value" 字段中。</p>
+<p><strong>3. 分发公钥到目标部署机器</strong></p>
+<p>公钥需要被添加到所有目标部署机器的 ~/.ssh/authorized_keys 文件中。有多种方式可以实现：</p>
+<p>手动复制 (适用于少量服务器，初始化配置):  最简单的方式是手动 SSH 登录到每台目标服务器，创建 .ssh 目录 (如果不存在)，并将公钥内容追加到 ~/.ssh/authorized_keys 文件中，并设置正确的权限 (chmod 700 ~/.ssh, chmod 600 ~/.ssh/authorized_keys)。</p>
+<p><strong>4. 在 CI/CD Pipeline 中使用私钥进行 SSH 连接</strong></p>
+<p>在 CI/CD 管道的部署任务中，需要使用之前存储在 Secrets 中的私钥进行 SSH 连接。具体的实现方式取决于你使用的 CI/CD 系统和部署工具。</p>
+<p>脚本方式 (例如 Shell 脚本):  在 CI/CD 任务中执行 Shell 脚本，使用 ssh 命令进行连接。</p>
+<p>示例 (GitLab CI .gitlab-ci.yml 文件):</p>
+<div class="highlight highlight-source-yaml"><pre class="notranslate"><span class="pl-ent">deploy_job</span>:
+  <span class="pl-ent">stage</span>: <span class="pl-s">deploy</span>
+  <span class="pl-ent">image</span>: <span class="pl-s">alpine/ssh  </span><span class="pl-c"><span class="pl-c">#</span> 包含 ssh 命令的 Docker 镜像</span>
+  <span class="pl-ent">variables</span>:
+    <span class="pl-ent">DEPLOY_SERVER_IP</span>: <span class="pl-s"><span class="pl-pds">"</span>your_deploy_server_ip<span class="pl-pds">"</span></span>
+    <span class="pl-ent">DEPLOY_USER</span>: <span class="pl-s"><span class="pl-pds">"</span>deploy_user<span class="pl-pds">"</span></span>
+    <span class="pl-ent">DEPLOY_PATH</span>: <span class="pl-s"><span class="pl-pds">"</span>/path/to/deploy/directory<span class="pl-pds">"</span></span>
+  <span class="pl-ent">script</span>:
+    - <span class="pl-s">mkdir -p ~/.ssh</span>
+    - <span class="pl-s">echo "$DEPLOY_PRIVATE_KEY" &gt; ~/.ssh/id_rsa  </span><span class="pl-c"><span class="pl-c">#</span> 将 Secret 变量写入私钥文件</span>
+    - <span class="pl-s">chmod 600 ~/.ssh/id_rsa</span>
+    - <span class="pl-s">ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $DEPLOY_USER@$DEPLOY_SERVER_IP "</span>
+        <span class="pl-s">cd $DEPLOY_PATH &amp;&amp;</span>
+        <span class="pl-s">git pull origin main &amp;&amp;</span>
+        <span class="pl-c"><span class="pl-c">#</span> 执行部署命令，例如重启服务等</span>
+        <span class="pl-s">echo 'Deployment successful!'</span>
+      <span class="pl-s"><span class="pl-pds">"</span></span>
+<span class="pl-s">  environment:</span>
+<span class="pl-s">    name: production</span></pre></div></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://chajiuqqq.github.io/">Chris.Cai Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek v2.22 https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","chajiuqqq/chajiuqqq.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+</script>
+<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>
+
+</html>
