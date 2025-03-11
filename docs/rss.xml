@@ -1,5 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Wed, 05 Mar 2025 06:22:39 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>git submodule初始化区别</title><link>https://chajiuqqq.github.io//post/git%20submodule-chu-shi-hua-qu-bie.html</link><description>## 拉取子仓库的N种方法
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Tue, 11 Mar 2025 09:32:44 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>mysql执行脚本的方式</title><link>https://chajiuqqq.github.io//post/mysql-zhi-xing-jiao-ben-de-fang-shi.html</link><description>方式一：mysql -e
+`mysql -e 'source batch-file'`
+方式二：mysql &lt; batch-file
+`mysql -h host -u user -p &lt; batch-file`
+对于这种方式，还可以查看文件执行时的输出，有如下两种方法：
+```
+mysql &lt; batch-file | more
+mysql &lt; batch-file &gt; mysql.out
+```
+方式三：mysql客户端命令行方式
+先登录mysql客户端，然后运行如下语句：
+`mysql&gt; source /path/filename;`。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/mysql-zhi-xing-jiao-ben-de-fang-shi.html</guid><pubDate>Tue, 11 Mar 2025 09:32:17 +0000</pubDate></item><item><title>git submodule初始化区别</title><link>https://chajiuqqq.github.io//post/git%20submodule-chu-shi-hua-qu-bie.html</link><description>## 拉取子仓库的N种方法
  
 - clone 主仓库时自动拉取子仓库，使用` --recurse-submodules`参数：`git clone --recurse-submodules https://github.com/chaconinc/MainProject`
 
