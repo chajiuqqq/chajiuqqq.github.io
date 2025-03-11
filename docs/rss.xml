@@ -1,7 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Tue, 11 Mar 2025 09:33:37 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>scp用法</title><link>https://chajiuqqq.github.io//post/scp-yong-fa.html</link><description>递归复制，指定私钥，指定端口
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Tue, 11 Mar 2025 09:37:12 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>scp用法</title><link>https://chajiuqqq.github.io//post/scp-yong-fa.html</link><description>递归复制，指定私钥，指定端口
 ```
 scp -r  -i huyw_private.huyw_private -P 8022 /usr/local/mysql/var/tg/stat_get.frm root@10.11.1.91:/var/lib/mysql/tg
+```
+
+免密方式：
+1. 生成密钥对：
+```
+ssh-keygen -t rsa -b 4096 -N '' -f ./id_rsa_deploy
+cat id_rsa_deploy.pub
+
+```
+2. 在目标机器上导入公钥：
+```
+mkdir -p ~/.ssh
+touch ~/.ssh/authorized_keys
+# 复制公钥到该文件
+
+# 改权限
+chmod 600 ~/.ssh/id_rsa
 ```。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/scp-yong-fa.html</guid><pubDate>Tue, 11 Mar 2025 09:33:15 +0000</pubDate></item><item><title>mysql执行脚本的方式</title><link>https://chajiuqqq.github.io//post/mysql-zhi-xing-jiao-ben-de-fang-shi.html</link><description>方式一：mysql -e
 `mysql -e 'source batch-file'`
 方式二：mysql &lt; batch-file

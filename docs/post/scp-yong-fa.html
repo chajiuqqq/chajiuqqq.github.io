@@ -13,11 +13,45 @@
 <meta name="description" content="递归复制，指定私钥，指定端口
 ```
 scp -r  -i huyw_private.huyw_private -P 8022 /usr/local/mysql/var/tg/stat_get.frm root@10.11.1.91:/var/lib/mysql/tg
+```
+
+免密方式：
+1. 生成密钥对：
+```
+ssh-keygen -t rsa -b 4096 -N '' -f ./id_rsa_deploy
+cat id_rsa_deploy.pub
+
+```
+2. 在目标机器上导入公钥：
+```
+mkdir -p ~/.ssh
+touch ~/.ssh/authorized_keys
+# 复制公钥到该文件
+
+# 改权限
+chmod 600 ~/.ssh/id_rsa
 ```。">
 <meta property="og:title" content="scp用法">
 <meta property="og:description" content="递归复制，指定私钥，指定端口
 ```
 scp -r  -i huyw_private.huyw_private -P 8022 /usr/local/mysql/var/tg/stat_get.frm root@10.11.1.91:/var/lib/mysql/tg
+```
+
+免密方式：
+1. 生成密钥对：
+```
+ssh-keygen -t rsa -b 4096 -N '' -f ./id_rsa_deploy
+cat id_rsa_deploy.pub
+
+```
+2. 在目标机器上导入公钥：
+```
+mkdir -p ~/.ssh
+touch ~/.ssh/authorized_keys
+# 复制公钥到该文件
+
+# 改权限
+chmod 600 ~/.ssh/id_rsa
 ```。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://chajiuqqq.github.io//post/scp-yong-fa.html">
@@ -80,6 +114,24 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <div id="content">
 <div class="markdown-body" id="postBody"><p>递归复制，指定私钥，指定端口</p>
 <pre class="notranslate"><code class="notranslate">scp -r  -i huyw_private.huyw_private -P 8022 /usr/local/mysql/var/tg/stat_get.frm root@10.11.1.91:/var/lib/mysql/tg
+</code></pre>
+<p>免密方式：</p>
+<ol>
+<li>生成密钥对：</li>
+</ol>
+<pre class="notranslate"><code class="notranslate">ssh-keygen -t rsa -b 4096 -N "" -f ./id_rsa_deploy
+cat id_rsa_deploy.pub
+
+</code></pre>
+<ol start="2">
+<li>在目标机器上导入公钥：</li>
+</ol>
+<pre class="notranslate"><code class="notranslate">mkdir -p ~/.ssh
+touch ~/.ssh/authorized_keys
+# 复制公钥到该文件
+
+# 改权限
+chmod 600 ~/.ssh/id_rsa
 </code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
