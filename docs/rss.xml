@@ -1,5 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Tue, 11 Mar 2025 09:37:12 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>scp用法</title><link>https://chajiuqqq.github.io//post/scp-yong-fa.html</link><description>递归复制，指定私钥，指定端口
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Chris.Cai Blog</title><link>https://chajiuqqq.github.io/</link><description>前进前进前进！</description><copyright>Chris.Cai Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/50012686?v=4</url><title>avatar</title><link>https://chajiuqqq.github.io/</link></image><lastBuildDate>Tue, 08 Apr 2025 06:48:20 +0000</lastBuildDate><managingEditor>Chris.Cai Blog</managingEditor><ttl>60</ttl><webMaster>Chris.Cai Blog</webMaster><item><title>firewalld防火墙设置</title><link>https://chajiuqqq.github.io//post/firewalld-fang-huo-qiang-she-zhi.html</link><description>检查状态：
+
+```bash
+sudo systemctl status firewalld  
+```
+启动和停止：
+
+```bash
+sudo systemctl start firewalld  
+sudo systemctl stop firewalld  
+```
+查看当前配置：
+
+```bash
+sudo firewall-cmd --list-all  
+```
+# firewalld 怎么允许入站端口
+
+在 `firewalld` 中允许入站端口非常简单。</description><guid isPermaLink="true">https://chajiuqqq.github.io//post/firewalld-fang-huo-qiang-she-zhi.html</guid><pubDate>Tue, 08 Apr 2025 06:47:50 +0000</pubDate></item><item><title>scp用法</title><link>https://chajiuqqq.github.io//post/scp-yong-fa.html</link><description>递归复制，指定私钥，指定端口
 ```
 scp -r  -i huyw_private.huyw_private -P 8022 /usr/local/mysql/var/tg/stat_get.frm root@10.11.1.91:/var/lib/mysql/tg
 ```
